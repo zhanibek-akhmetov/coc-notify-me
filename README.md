@@ -1,5 +1,9 @@
 # CoC Notify Me
 
+[![tests](https://github.com/zhanibek-akhmetov/coc-notify-me/actions/workflows/tests.yml/badge.svg)](https://github.com/zhanibek-akhmetov/coc-notify-me/actions/workflows/tests.yml)
+![python](https://img.shields.io/badge/python-3.9%2B-blue)
+![dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)
+
 **A Telegram bot that pings you when your Clash of Clans upgrades finish, plus an upgrade planner that builds a Gantt chart of the fastest way to max your Town Hall.**
 
 Pure Python 3.9+, zero dependencies (standard library only). No pip install.
@@ -100,12 +104,28 @@ python api-tools/coc_war_hunt.py                  # recover full old wars via op
 
 ---
 
+## ✅ Tests
+
+No network or tokens needed — GitHub Actions runs them on every push (Linux + Windows, Python 3.9 and 3.12):
+
+```bash
+python tests/test_bot.py        # bot with a fake Telegram API: every button, RU/EN, notifications, quiet hours, bad input
+python tests/test_planner.py    # builds the example plan and validates the schedule against the wiki tables
+python tests/test_api_tools.py  # API scripts compile and fail politely without a key
+```
+
+The planner validator checks that no builder or the lab does two things at once, nothing starts while you sleep, every duration matches the wiki, levels go in order, research waits for the right lab level and unlocking building, and everything reaches the Town Hall cap. It is itself tested by feeding it a deliberately broken schedule.
+
+---
+
 ## 🗂 Project structure
 ```
 bot/          coc_bot.py, coc_names.json (RU/EN names), build_names.py
 planner/      coc_plan.py, make_ics.py, examples/
 api-tools/    coc_war.py, coc_war_hunt.py, coc_warlog_year.py, coc_tag.py
 docs/         index.html (demo chart for GitHub Pages)
+tests/        test_bot.py, test_planner.py, test_api_tools.py
+.github/      workflows/tests.yml (CI)
 ```
 
 Code comments are in Russian.
