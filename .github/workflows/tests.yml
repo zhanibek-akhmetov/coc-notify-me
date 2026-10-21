@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-24.04, windows-latest]  # 24.04: на Ubuntu 26 может не быть Python 3.9
         python: ["3.9", "3.12"]
     env:
       PYTHONUTF8: "1"
