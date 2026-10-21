@@ -115,9 +115,9 @@ coc_bot.on_message(tg, db, M(7, json.dumps(th8)))
 check("export" in db["chats"]["7"]["accounts"]["#EXAMPLE"], "экспорт сохранён для графика")
 coc_bot.on_message(tg, db, M(7, "📊 График"))
 opts = [b[0]["callback_data"] for b in last()[2]["inline_keyboard"]]
-check("Что учитывать" in last()[1] and opts == ["po:lab", "po:heroes", "po:res", "po:go"],
-      "сначала выбор: лаборатория, герои, ресурсные здания + «Построить»")
-check(all(b[0]["text"].startswith("✅") for b in last()[2]["inline_keyboard"][:3]), "по умолчанию всё отмечено")
+check("Что учитывать" in last()[1] and opts == ["po:def", "po:lab", "po:heroes", "po:res", "po:go"],
+      "сначала выбор: оборона, лаборатория, герои, ресурсные здания + «Построить»")
+check(all(b[0]["text"].startswith("✅") for b in last()[2]["inline_keyboard"][:4]), "по умолчанию всё отмечено")
 n = len(tg.out)
 coc_bot.on_callback(tg, db, CB(7, "po:go"))
 check(len(tg.out) == n + 2 and "Строю план" in tg.out[n][1], "«Построить»: сначала «строю план», потом результат")
@@ -143,9 +143,15 @@ check(db["chats"]["7"]["plan_opts"]["heroes"] is False, "галочка «Гер
 coc_bot.on_callback(tg, db, CB(7, "po:go"))
 P = unpack(last()[2]["inline_keyboard"][0][0]["url"])
 heroes_planned = [x for x in P["i"] if x[3] in (28000000, 28000001) and x[7] != "c"]
-check(P["o"] == [1, 0, 1] and not heroes_planned and "герои" not in last()[1].split("Учтено:")[1].split("\n")[0],
+check(P["o"] == [1, 0, 1, 1] and not heroes_planned and "герои" not in last()[1].split("Учтено:")[1].split("\n")[0],
       "без героев: в плане нет улучшений героев, в сообщении «Учтено» без героев")
 coc_bot.on_callback(tg, db, CB(7, "po:heroes"))
+coc_bot.on_callback(tg, db, CB(7, "po:def"))
+coc_bot.on_callback(tg, db, CB(7, "po:go"))
+P = unpack(last()[2]["inline_keyboard"][0][0]["url"])
+check(P["o"] == [1, 1, 1, 0] and not any(x[3] in (1000008, 1000009, 1000012) and x[7] != "c" for x in P["i"])
+      and not P["w"], "без обороны: в плане нет пушек/башен/ПВО и стен")
+coc_bot.on_callback(tg, db, CB(7, "po:def"))
 coc_bot.on_callback(tg, db, CB(7, "tz:5"))
 coc_bot.on_message(tg, db, M(7, "🏠 Меню"))
 check([b["callback_data"] for b in last()[2]["inline_keyboard"][0]] == ["act:help", "act:tz"],

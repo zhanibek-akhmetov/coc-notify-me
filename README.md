@@ -33,7 +33,7 @@ Pure Python 3.9+, zero dependencies (standard library only). No pip install.
 - **📋 Running**: every timer in a clean aligned list (monospace time column, quote blocks).
 - **⏭ Next**: what finishes next in each village.
 - **👷 Builders**: how many builders are free, when busy ones free up, whether the lab is free.
-- **📊 Chart**: first asks what to include — 🧪 laboratory research, 👑 heroes, 💰 resource buildings (mines, collectors, drills, storages) — then builds the fastest upgrade plan from your last export and sends a button that opens the interactive Gantt chart. The whole plan is packed into the link itself (after `#`), so it is never sent to a server or stored anywhere.
+- **📊 Chart**: first asks what to include — 🛡 defenses (incl. traps and walls), 🧪 laboratory research, 👑 heroes, 💰 resource buildings (mines, collectors, drills, storages) — then builds the fastest upgrade plan from your last export and sends a button that opens the interactive Gantt chart. The whole plan is packed into the link itself (after `#`), so it is never sent to a server or stored anywhere.
 - **🌙 Quiet hours**: no pings at night, one "Good morning" summary instead. The chart treats them as your sleep time.
 - **🕐 Time zone** (in the menu): times, quiet hours and the chart follow your zone.
 - **🌐 Russian / English**: UI and official in-game object names in both languages.
@@ -89,7 +89,7 @@ How it works:
 
 Supported Town Halls: 5–8 (adding more = adding their tables to `coc_plan.py`).
 
-Options: `--tz 1` (time zone, default UTC+5), `--lang en`, and `--no-lab` / `--no-heroes` / `--no-res` to leave research, heroes or resource buildings out of the plan (anything already running still occupies its builder or the lab). The chart page is one template ([`planner/chart_template.src.html`](planner/chart_template.src.html)) used three ways: the offline `plan_thN.html`, the demo on GitHub Pages, and the viewer for links from the bot (`…/coc-notify-me/#p=<compressed plan>`). After editing it, run `python planner/build_template.py`.
+Options: `--tz 1` (time zone, default UTC+5), `--lang en`, and `--no-def` / `--no-lab` / `--no-heroes` / `--no-res` to leave defenses (with traps and walls), research, heroes or resource buildings out of the plan (anything already running still occupies its builder or the lab). The chart page is one template ([`planner/chart_template.src.html`](planner/chart_template.src.html)) used three ways: the offline `plan_thN.html`, the demo on GitHub Pages, and the viewer for links from the bot (`…/coc-notify-me/#p=<compressed plan>`). After editing it, run `python planner/build_template.py`.
 
 ---
 

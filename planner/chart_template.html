@@ -39,7 +39,7 @@ const T = {
        new: "постройка", wallsTo: n => `Стены до ${n} ур.`, wallsNew: n => `${n} новых`, wallsLvl: (n, l) => `${n} шт. ${l} ур.`,
        wallsGold: "только золотом", wallsAny: "золотом или эликсиром", res: {g: "золото", e: "эликсир", d: "тёмный эликсир"},
        resOf: {g: " золота", e: " эликсира", d: " тёмного эликсира"}, nodata: "Нет данных плана. Открой ссылку из бота.",
-       excl: "не учтено:", partNames: ["лаборатория", "герои", "ресурсные здания"], bad: "Не удалось прочитать данные из ссылки.", old: "Браузер слишком старый для этой ссылки — обнови его."},
+       excl: "не учтено:", partNames: ["лаборатория", "герои", "ресурсные здания", "оборона"], bad: "Не удалось прочитать данные из ссылки.", old: "Браузер слишком старый для этой ссылки — обнови его."},
   en: {title: n => `Plan: max Town Hall ${n} → Town Hall ${n + 1}`, export: "from export at", night: "sleep",
        assume: "assuming resources are available", all: "All done", th: n => `Town Hall ${n}`, gold: "Gold", el: "Elixir",
        de: "Dark Elixir", walls: "Walls", lg: "gold", le: "elixir", ld: "dark elixir", lc: "already running",
@@ -50,7 +50,7 @@ const T = {
        new: "new", wallsTo: n => `Walls to level ${n}`, wallsNew: n => `${n} new`, wallsLvl: (n, l) => `${n} × level ${l}`,
        wallsGold: "gold only", wallsAny: "gold or elixir", res: {g: "gold", e: "elixir", d: "dark elixir"},
        resOf: {g: " gold", e: " elixir", d: " dark elixir"}, nodata: "No plan data. Open the link from the bot.",
-       excl: "not included:", partNames: ["laboratory", "heroes", "resource buildings"], bad: "Couldn't read the plan from this link.", old: "Your browser is too old for this link — please update it."}
+       excl: "not included:", partNames: ["laboratory", "heroes", "resource buildings", "defenses"], bad: "Couldn't read the plan from this link.", old: "Your browser is too old for this link — please update it."}
 };
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
 const num = n => Number(n).toLocaleString("ru-RU");
@@ -88,7 +88,7 @@ function render(P) {
   const key = it => `${it[0]}|${it[1]}|${it[3]}|${it[4]}|${it[6]}`;
   const C = {g: ["var(--gold)", "var(--goldt)"], e: ["var(--el)", "var(--elt)"], d: ["var(--de)", "var(--det)"], c: ["var(--cur)", "var(--curt)"]};
   const [gold, el, de, wg, wa] = P.k;
-  const excluded = (P.o || [1, 1, 1]).map((on, k) => on ? null : L.partNames[k]).filter(Boolean);
+  const excluded = (P.o || [1, 1, 1, 1]).map((on, k) => on ? null : L.partNames[k]).filter(Boolean);
 
   // ночи (в часовом поясе плана)
   const nights = [];

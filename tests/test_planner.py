@@ -159,9 +159,15 @@ def main():
         no_res = coc_plan.make_plan(exp, parts={"res": False})
         check(not planned(no_res, lambda x: x["did"] in coc_plan.RESOURCE_BUILDINGS),
               "без ресурсных зданий — ни шахт, ни сборщиков, ни хранилищ")
+        no_def = coc_plan.make_plan(exp, parts={"def": False})
+        check(not planned(no_def, lambda x: x["did"] in coc_plan.DEFENSES) and not no_def["instant"]
+              and no_def["wall_gold"] + no_def["wall_any"] == 0 and not no_def["walls"],
+              "без обороны — ни пушек, ни башен, ни ловушек, ни стен")
+        check(planned(no_def, lambda x: x["did"] == 1000001), "без обороны ратуша всё равно в плане")
         full_builds = len(planned(coc_plan.make_plan(exp), lambda x: x["kind"] == "стройка"))
         check(len(planned(no_res, lambda x: x["kind"] == "стройка")) < full_builds, "исключение сокращает план")
-        for name_, p in (("без лаборатории", no_lab), ("без героев", no_her), ("без ресурсов", no_res)):
+        for name_, p in (("без лаборатории", no_lab), ("без героев", no_her), ("без ресурсов", no_res),
+                         ("без обороны", no_def)):
             for x in p["schedule"]:
                 x["start"], x["end"] = x["start"].isoformat(), x["end"].isoformat()
             errs = [e for e in validate(exp, copy.deepcopy(p["schedule"])) if "не доведено" not in e]

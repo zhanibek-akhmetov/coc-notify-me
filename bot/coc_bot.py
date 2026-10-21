@@ -96,11 +96,11 @@ T = {
                       "График открывается в браузере: весь план зашит в ссылку и нигде не сохраняется. "
                       "Нажимай на полоски — отмечай, что уже поставил."),
         "open": "📊 Открыть график",
-        "po_title": "📊 <b>Что учитывать в графике?</b>\nОтметь нужное и нажми «Построить». Строители и ратуша учитываются всегда.",
-        "po_parts": {"lab": "🧪 Лаборатория", "heroes": "👑 Герои", "res": "💰 Ресурсные здания"},
+        "po_title": "📊 <b>Что учитывать в графике?</b>\nОтметь нужное и нажми «Построить». Ратуша, армейские здания и замок клана учитываются всегда.",
+        "po_parts": {"def": "🛡 Оборона", "lab": "🧪 Лаборатория", "heroes": "👑 Герои", "res": "💰 Ресурсные здания"},
         "po_go": "📊 Построить график",
         "plan_parts": "Учтено: {x}",
-        "plan_parts_base": "строения",
+        "plan_parts_base": "ратуша и армейские здания",
         "tz_title": "🕐 <b>Часовой пояс:</b> {tz}\n\nВ нём показываю время, считаю тихие часы и строю график.",
         "tz_ans": "Часовой пояс: {tz}",
         "tz_names": {0: "Лондон (зима), Лиссабон", 1: "Лондон (лето), Берлин, Париж", 2: "Киев, Хельсинки",
@@ -183,11 +183,11 @@ T = {
                       "The chart opens in your browser: the whole plan is inside the link and isn't stored anywhere. "
                       "Tap bars to mark what you've started."),
         "open": "📊 Open chart",
-        "po_title": "📊 <b>What should the chart include?</b>\nTick what you need and tap «Build». Buildings and the Town Hall are always included.",
-        "po_parts": {"lab": "🧪 Laboratory", "heroes": "👑 Heroes", "res": "💰 Resource buildings"},
+        "po_title": "📊 <b>What should the chart include?</b>\nTick what you need and tap «Build». The Town Hall, army buildings and the Clan Castle are always included.",
+        "po_parts": {"def": "🛡 Defenses", "lab": "🧪 Laboratory", "heroes": "👑 Heroes", "res": "💰 Resource buildings"},
         "po_go": "📊 Build chart",
         "plan_parts": "Included: {x}",
-        "plan_parts_base": "buildings",
+        "plan_parts_base": "Town Hall & army buildings",
         "tz_title": "🕐 <b>Time zone:</b> {tz}\n\nUsed for times in messages, quiet hours and the chart.",
         "tz_ans": "Time zone: {tz}",
         "tz_names": {0: "London (winter), Lisbon", 1: "London (summer), Berlin, Paris", 2: "Kyiv, Helsinki",
@@ -588,7 +588,7 @@ def load_planner():
     raise ValueError("не найден coc_plan.py")
 
 
-PLAN_PARTS = ("lab", "heroes", "res")
+PLAN_PARTS = ("def", "lab", "heroes", "res")
 
 
 def plan_parts(chat):
