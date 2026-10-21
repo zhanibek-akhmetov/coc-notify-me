@@ -12,6 +12,19 @@ Pure Python 3.9+, zero dependencies (standard library only). No pip install.
 
 > Unofficial fan project, not affiliated with Supercell.
 
+<table>
+  <tr>
+    <td align="center"><img src="docs/screenshots/export.webp" width="230" alt="Timers after sending an export"><br><sub>Send an export → all timers</sub></td>
+    <td align="center"><img src="docs/screenshots/notifications.webp" width="230" alt="Upgrade finished notifications"><br><sub>«Done» notifications</sub></td>
+    <td align="center"><img src="docs/screenshots/gantt.webp" width="230" alt="Gantt chart opened from the bot"><br><sub>Gantt chart from the bot</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/chart-options.webp" width="230" alt="Choosing what the chart includes"><br><sub>Choose what to plan</sub></td>
+    <td align="center"><img src="docs/screenshots/plan.webp" width="230" alt="Plan summary with a link to the chart"><br><sub>Plan summary + link</sub></td>
+    <td align="center"><img src="docs/screenshots/welcome.webp" width="230" alt="Bot welcome screen"><br><sub>Welcome screen</sub></td>
+  </tr>
+</table>
+
 ---
 
 ## ✨ What's inside
