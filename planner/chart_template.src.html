@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoC: план прокачки</title>
+<style>
+:root{--bg:#fbfaf7;--card:#f1efe8;--ink:#1d1d1b;--mu:#6b6a64;--line:#e1e0d9;--night:rgba(0,0,0,.07);--gold:#eda100;--goldt:#412402;--el:#e87ba4;--elt:#4b1528;--de:#534ab7;--det:#eeedfe;--cur:#85b7eb;--curt:#0c447c;--done:#b4b2a9;--donet:#2c2c2a}
+@media (prefers-color-scheme:dark){:root{--bg:#1a1a19;--card:#262624;--ink:#f0efec;--mu:#a8a79f;--line:#33332f;--night:rgba(255,255,255,.06)}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,system-ui,Segoe UI,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 48px}h1{font-size:22px;font-weight:600;margin:0 0 4px}
+.sub{color:var(--mu);margin:0 0 20px}.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:20px}
+.kpi div{background:var(--card);border-radius:10px;padding:10px 14px}.kpi b{display:block;font-size:20px;font-weight:600}.kpi span{color:var(--mu);font-size:13px}
+.leg{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--mu);margin-bottom:8px}.leg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.wrap{overflow-x:auto;padding-bottom:6px}
+.row{display:flex;align-items:center;height:32px;margin-bottom:4px}.rl{width:56px;flex:none;font-size:12px;color:var(--mu);position:sticky;left:0;background:var(--bg);z-index:2}
+.tr{position:relative;flex:1;height:100%;background:var(--card);border-radius:5px;overflow:hidden}
+.bar{position:absolute;top:3px;bottom:3px;border-radius:3px;font-size:11px;line-height:26px;padding:0 4px;white-space:nowrap;overflow:hidden;border-right:2px solid var(--bg);cursor:pointer}
+.bar.done{background:var(--done)!important;color:var(--donet)!important;text-decoration:line-through}
+.n{position:absolute;top:0;bottom:0;background:var(--night)}.ax{position:relative;height:20px;margin-left:56px;font-size:11px;color:var(--mu)}
+.ax span{position:absolute;transform:translateX(-50%);white-space:nowrap}#info{min-height:22px;color:var(--mu);font-size:14px;margin:8px 0 24px}
+table{width:100%;border-collapse:collapse;margin-bottom:24px}td{padding:8px 6px;border-top:1px solid var(--line);vertical-align:top}.tm{white-space:nowrap;font-variant-numeric:tabular-nums;width:1%;font-weight:600}.mu{color:var(--mu);font-size:13px}
+h2{font-size:18px;font-weight:600;margin:8px 0}
+.task{cursor:pointer;padding:3px 0;user-select:none}.task .box{display:inline-block;width:14px;height:14px;border:1.5px solid var(--mu);border-radius:3px;margin-right:8px;vertical-align:-2px}
+.task.done{color:var(--mu);text-decoration:line-through}.task.done .box{background:var(--done);border-color:var(--done)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+button{font:inherit;font-size:13px;background:transparent;color:var(--mu);border:1px solid var(--line);border-radius:8px;padding:5px 12px;cursor:pointer}
+.empty{padding:40px 0;color:var(--mu)}
+</style></head><body><main id="app"><p class="empty">…</p></main>
+<script>
+const EMBEDDED = /*EMBEDDED_PLAN*/null;
+const NAMES = /*NAMES*/{};
+const T = {
+  ru: {title: n => `План: ратуша ${n} на максимум → ратуша ${n + 1}`, export: "по экспорту от", night: "сон",
+       assume: "ресурсы считаются доступными", all: "Всё готово", th: n => `Ратуша ${n}`, gold: "Золото", el: "Эликсир",
+       de: "Тёмный эликсир", walls: "Стены", lg: "за золото", le: "за эликсир", ld: "за тёмный эликсир",
+       lc: "уже идут", ldone: "поставил в работу", rows: ["Стр. 1", "Стр. 2", "Стр. 3", "Стр. 4", "Стр. 5", "Лаб."],
+       hint: "Нажми на полоску или на строку в списке, чтобы отметить «поставил в работу». Повторное нажатие снимает отметку.",
+       list: "Что и когда запускать", marked: (a, b) => `Отмечено: ${a} из ${b}`, reset: "Сбросить отметки",
+       confirm: "Снять все отметки?", noB: "Без строителя — в любое время", inst: "мгновенно", until: "до",
+       new: "постройка", wallsTo: n => `Стены до ${n} ур.`, wallsNew: n => `${n} новых`, wallsLvl: (n, l) => `${n} шт. ${l} ур.`,
+       wallsGold: "только золотом", wallsAny: "золотом или эликсиром", res: {g: "золото", e: "эликсир", d: "тёмный эликсир"},
+       resOf: {g: " золота", e: " эликсира", d: " тёмного эликсира"}, nodata: "Нет данных плана. Открой ссылку из бота.",
+       bad: "Не удалось прочитать данные из ссылки.", old: "Браузер слишком старый для этой ссылки — обнови его."},
+  en: {title: n => `Plan: max Town Hall ${n} → Town Hall ${n + 1}`, export: "from export at", night: "sleep",
+       assume: "assuming resources are available", all: "All done", th: n => `Town Hall ${n}`, gold: "Gold", el: "Elixir",
+       de: "Dark Elixir", walls: "Walls", lg: "gold", le: "elixir", ld: "dark elixir", lc: "already running",
+       ldone: "started", rows: ["B 1", "B 2", "B 3", "B 4", "B 5", "Lab"],
+       hint: "Tap a bar or a list row to mark it as started. Tap again to unmark.",
+       list: "What to start and when", marked: (a, b) => `Marked: ${a} of ${b}`, reset: "Reset marks",
+       confirm: "Clear all marks?", noB: "No builder needed — any time", inst: "instant", until: "until",
+       new: "new", wallsTo: n => `Walls to level ${n}`, wallsNew: n => `${n} new`, wallsLvl: (n, l) => `${n} × level ${l}`,
+       wallsGold: "gold only", wallsAny: "gold or elixir", res: {g: "gold", e: "elixir", d: "dark elixir"},
+       resOf: {g: " gold", e: " elixir", d: " dark elixir"}, nodata: "No plan data. Open the link from the bot.",
+       bad: "Couldn't read the plan from this link.", old: "Your browser is too old for this link — please update it."}
+};
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const num = n => Number(n).toLocaleString("ru-RU");
+
+async function decodeHash() {
+  const m = location.hash.match(/[#&]p=([A-Za-z0-9_-]+)/);
+  if (!m) return null;
+  if (typeof DecompressionStream === "undefined") throw new Error("old");
+  const b64 = m[1].replace(/-/g, "+").replace(/_/g, "/") + "===".slice((m[1].length + 3) % 4);
+  const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+  const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("deflate"));
+  return JSON.parse(await new Response(stream).text());
+}
+
+function render(P) {
+  const L = T[P.l] || T.ru, li = P.l === "en" ? 1 : 0;
+  document.documentElement.lang = P.l || "ru";
+  const pad = n => String(n).padStart(2, "0");
+  // время в часовом поясе плана: минуты от начала плана -> «дд.мм чч:мм»
+  const local = m => new Date((P.t0 + m * 60 + P.tz * 60) * 1000);
+  const f = m => { const d = local(m); return `${pad(d.getUTCDate())}.${pad(d.getUTCMonth() + 1)} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`; };
+  const hhmm = v => `${pad(Math.floor(v / 60))}:${pad(v % 60)}`;
+  const name = it => {
+    const [, , , did, lvl, isNew, n] = it;
+    const base = (NAMES[did] || [String(did), String(did)])[li] + (n ? ` #${n}` : "");
+    return base + (isNew ? ` — ${L.new}` : ` → ${lvl}`);
+  };
+  const items = P.i;
+  const shift = local(0).getUTCMinutes();              // начало графика — ровный час
+  const endM = Math.max(...items.map(x => x[1] + x[2]));
+  const T0 = -shift, TOT = endM - T0 + 60;
+  const pos = m => (m - T0) / TOT * 100;
+  const width = Math.max(900, Math.round(TOT / 3));
+  const thItem = items.find(x => x[3] === 1000001);
+  const key = it => `${it[0]}|${it[1]}|${it[3]}|${it[4]}|${it[6]}`;
+  const C = {g: ["var(--gold)", "var(--goldt)"], e: ["var(--el)", "var(--elt)"], d: ["var(--de)", "var(--det)"], c: ["var(--cur)", "var(--curt)"]};
+  const [gold, el, de, wg, wa] = P.k;
+
+  // ночи (в часовом поясе плана)
+  const nights = [];
+  const dayStart = -(local(0).getUTCHours() * 60 + shift) - 1440;
+  for (let d = dayStart; d < endM + 1440; d += 1440) {
+    let a = d + P.bed, b = d + P.wake;
+    if (P.bed > P.wake) b += 1440;                       // ночь начинается до полуночи
+    a = Math.max(a, T0); b = Math.min(b, T0 + TOT);
+    if (a < b) nights.push([a, b]);
+  }
+
+  // список «что и когда»
+  const groups = new Map();
+  items.filter(x => x[7] !== "c").forEach(x => { if (!groups.has(x[1])) groups.set(x[1], []); groups.get(x[1]).push(x); });
+  const task = (k, body) => `<div class="task" data-k="${esc(k)}"><span class="box"></span>${body}</div>`;
+  const rows = [...groups.entries()].sort((a, b) => a[0] - b[0]).map(([s, xs]) =>
+    `<tr><td class="tm">${f(s)}</td><td>` + xs.map(x =>
+      task(key(x), `${x[0] === 5 ? "🧪 " : ""}${esc(name(x))} <span class="mu">· ${num(x[8])} ${L.res[x[7]] || ""} · ${L.until} ${f(x[1] + x[2])}</span>`)
+    ).join("") + "</td></tr>").join("");
+  const extra = (P.x || []).map(([did, lvl, r, cost]) =>
+    task(`x|${did}|${lvl}`, `${esc((NAMES[did] || [did, did])[li])}${lvl > 1 ? " → " + lvl : ""} <span class="mu">· ${num(cost)} ${L.res[r]} · ${L.inst}</span>`));
+  const wallParts = (P.w || []).filter(([lvl]) => lvl < P.wm).map(([lvl, n]) => lvl ? L.wallsLvl(n, lvl) : L.wallsNew(n));
+  if (wallParts.length) extra.push(task("walls", `${L.wallsTo(P.wm)} (${wallParts.join(", ")}) <span class="mu">· ${num(wg)} ${L.wallsGold} + ${num(wa)} ${L.wallsAny}</span>`));
+
+  const kpi = [[L.all, f(endM)], thItem ? [L.th(P.th + 1), f(thItem[1] + thItem[2])] : null, [L.gold, num(gold)], [L.el, num(el)],
+               de ? [L.de, num(de)] : null, wg + wa ? [L.walls, num(wg + wa)] : null].filter(Boolean);
+  document.title = L.title(P.th);
+  document.getElementById("app").innerHTML = `
+    <h1>${esc(L.title(P.th))}</h1>
+    <p class="sub">${esc(P.tag)} · ${L.export} ${f(0)} · ${L.night} ${hhmm(P.bed)}–${hhmm(P.wake)} · ${L.assume}</p>
+    <div class="kpi">${kpi.map(([a, b]) => `<div><span>${a}</span><b>${b}</b></div>`).join("")}</div>
+    <div class="leg"><span><i style="background:var(--gold)"></i>${L.lg}</span><span><i style="background:var(--el)"></i>${L.le}</span>${de ? `<span><i style="background:var(--de)"></i>${L.ld}</span>` : ""}<span><i style="background:var(--cur)"></i>${L.lc}</span><span><i style="background:var(--done)"></i>${L.ldone}</span><span><i style="background:var(--night);outline:1px solid var(--line)"></i>${L.night}</span></div>
+    <div class="wrap"><div class="gantt" id="g" style="min-width:${width}px"></div></div>
+    <div id="info">${L.hint}</div>
+    <div class="top"><h2>${L.list}</h2><span><span id="cnt" class="mu"></span> <button id="reset">${L.reset}</button></span></div>
+    <table>${rows}</table>
+    ${extra.length ? `<h2>${L.noB}</h2><table><tr><td>${extra.join("")}</td></tr></table>` : ""}`;
+
+  const g = document.getElementById("g"), info = document.getElementById("info");
+  L.rows.forEach((label, r) => {
+    const row = document.createElement("div"); row.className = "row";
+    row.innerHTML = `<div class="rl">${label}</div>`;
+    const tr = document.createElement("div"); tr.className = "tr";
+    nights.forEach(([a, b]) => { const n = document.createElement("div"); n.className = "n"; n.style.left = pos(a) + "%"; n.style.width = (b - a) / TOT * 100 + "%"; tr.appendChild(n); });
+    items.filter(x => x[0] === r).forEach(x => {
+      const [, s, d, , , , , k, cost] = x, nm = name(x);
+      const b = document.createElement("div"); b.className = "bar"; b.dataset.k = key(x);
+      b.style.left = pos(s) + "%"; b.style.width = d / TOT * 100 + "%";
+      b.style.background = C[k][0]; b.style.color = C[k][1];
+      if (d / TOT * width >= 90) b.textContent = nm;
+      const show = () => { info.textContent = `${nm} — ${f(s)} → ${f(s + d)}` + (cost ? ` · ${num(cost)}${L.resOf[k]}` : ""); };
+      b.onmouseenter = show;
+      if (k !== "c") b.onclick = () => { show(); toggle(key(x)); };
+      tr.appendChild(b);
+    });
+    row.appendChild(tr); g.appendChild(row);
+  });
+  const ax = document.createElement("div"); ax.className = "ax";
+  for (let m = T0 + 60; m < T0 + TOT; m += 240) { const s = document.createElement("span"); s.style.left = pos(m) + "%"; s.textContent = f(m); ax.appendChild(s); }
+  g.appendChild(ax);
+
+  const SK = `coc-plan-done-${P.tag}-${P.t0}`;
+  let done = {}; try { done = JSON.parse(localStorage.getItem(SK)) || {}; } catch (e) {}
+  const total = document.querySelectorAll(".task").length;
+  function paint() {
+    document.querySelectorAll("[data-k]").forEach(el => el.classList.toggle("done", !!done[el.dataset.k]));
+    document.getElementById("cnt").textContent = L.marked(document.querySelectorAll(".task.done").length, total);
+  }
+  function toggle(k) { if (done[k]) delete done[k]; else done[k] = 1; try { localStorage.setItem(SK, JSON.stringify(done)); } catch (e) {} paint(); }
+  document.querySelectorAll(".task").forEach(el => el.onclick = () => toggle(el.dataset.k));
+  document.getElementById("reset").onclick = () => { if (confirm(L.confirm)) { done = {}; try { localStorage.removeItem(SK); } catch (e) {} paint(); } };
+  paint();
+}
+
+(async () => {
+  const app = document.getElementById("app");
+  let P = null;
+  try { P = await decodeHash(); } catch (e) { app.innerHTML = `<p class="empty">${e.message === "old" ? T.ru.old + "<br>" + T.en.old : T.ru.bad + "<br>" + T.en.bad}</p>`; return; }
+  P = P || EMBEDDED;
+  if (!P) { app.innerHTML = `<p class="empty">${T.ru.nodata}<br>${T.en.nodata}</p>`; return; }
+  render(P);
+  window.addEventListener("hashchange", () => location.reload());
+})();
+</script></body></html>

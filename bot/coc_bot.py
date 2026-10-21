@@ -77,11 +77,28 @@ T = {
         "new": "постройка",
         "busy": "занята", "free": "свободна",
         "btn": {"list": "📋 Что идёт", "next": "⏭ Ближайшее", "free": "👷 Свободные",
-                "quiet": "🌙 Тихие часы", "menu": "🏠 Меню", "lang": "🌐 English"},
-        "ibtn": {"menu": "🏠 Главное меню", "help": "❓ Как пользоваться"},
+                "quiet": "🌙 Тихие часы", "plan": "📊 График", "menu": "🏠 Меню", "lang": "🌐 English"},
+        "ibtn": {"menu": "🏠 Главное меню", "help": "❓ Как пользоваться", "tz": "🕐 Часовой пояс"},
         "commands": [("menu", "Главное меню"), ("list", "Что сейчас идёт"), ("next", "Что завершится ближайшим"),
-                     ("free", "Когда освободятся строители"), ("quiet", "Тихие часы"),
-                     ("help", "Как пользоваться"), ("lang", "Switch to English"), ("clear", "Забыть все таймеры")],
+                     ("free", "Когда освободятся строители"), ("plan", "График прокачки"), ("quiet", "Тихие часы"),
+                     ("tz", "Часовой пояс"), ("help", "Как пользоваться"), ("lang", "Switch to English"),
+                     ("clear", "Забыть все таймеры")],
+        "plan_wait": "⏳ Строю план прокачки… это займёт несколько секунд.",
+        "plan_none": ("📊 Для графика нужен экспорт деревни — пришли его, и я построю план "
+                      "(какие улучшения и когда запускать, чтобы быстрее всего прокачать ратушу)."),
+        "plan_fail": "❌ Не получилось построить план: {e}.",
+        "plan_title": "📊 <b>План прокачки</b> · {tag}",
+        "plan_body": ("Ратуша {th} на максимум → ратуша {th1}\n"
+                      "🏁 Всё готово: <b>{end}</b>\n"
+                      "🏰 Ратуша {th1}: <b>{th_end}</b>\n"
+                      "<i>Экспорт от {ts} · сон {bed}–{wake} · {tz}</i>\n\n"
+                      "График открывается в браузере: весь план зашит в ссылку и нигде не сохраняется. "
+                      "Нажимай на полоски — отмечай, что уже поставил."),
+        "open": "📊 Открыть график",
+        "tz_title": "🕐 <b>Часовой пояс:</b> {tz}\n\nВ нём показываю время, считаю тихие часы и строю график.",
+        "tz_ans": "Часовой пояс: {tz}",
+        "tz_names": {0: "Лондон (зима), Лиссабон", 1: "Лондон (лето), Берлин, Париж", 2: "Киев, Хельсинки",
+                     3: "Москва, Стамбул", 4: "Дубай, Баку", 5: "Казахстан, Ташкент", 6: "Бишкек, Омск"},
         "no_data": ("📭 <b>Таймеров пока нет</b>\n\n"
                     "Пришли мне экспорт деревни — и я начну следить за стройками и исследованиями.\n\n"
                     "<b>Как сделать экспорт</b>\n"
@@ -133,7 +150,7 @@ T = {
                  "<b>Кнопки</b>\n"
                  "📋 Что идёт — все таймеры\n⏭ Ближайшее — что завершится следующим\n"
                  "👷 Свободные — когда освободятся строители и лаборатория\n🌙 Тихие часы — не будить ночью\n"
-                 "🏠 Меню — главное меню\n🌐 English — switch to English\n/clear — забыть все таймеры"),
+                 "📊 График — план прокачки ратуши (откроется в браузере)\n🏠 Меню — главное меню, там же 🕐 часовой пояс\n🌐 English — switch to English\n/clear — забыть все таймеры"),
     },
     "en": {
         "village": {HOME: "🏠 HOME VILLAGE", BB: "🛠 BUILDER BASE"},
@@ -141,11 +158,28 @@ T = {
         "new": "new",
         "busy": "busy", "free": "free",
         "btn": {"list": "📋 Running", "next": "⏭ Next", "free": "👷 Builders",
-                "quiet": "🌙 Quiet hours", "menu": "🏠 Menu", "lang": "🌐 Русский"},
-        "ibtn": {"menu": "🏠 Main menu", "help": "❓ How to use"},
+                "quiet": "🌙 Quiet hours", "plan": "📊 Chart", "menu": "🏠 Menu", "lang": "🌐 Русский"},
+        "ibtn": {"menu": "🏠 Main menu", "help": "❓ How to use", "tz": "🕐 Time zone"},
         "commands": [("menu", "Main menu"), ("list", "What's running now"), ("next", "What finishes next"),
-                     ("free", "When builders get free"), ("quiet", "Quiet hours"),
-                     ("help", "How to use"), ("lang", "Переключить на русский"), ("clear", "Forget all timers")],
+                     ("free", "When builders get free"), ("plan", "Upgrade chart"), ("quiet", "Quiet hours"),
+                     ("tz", "Time zone"), ("help", "How to use"), ("lang", "Переключить на русский"),
+                     ("clear", "Forget all timers")],
+        "plan_wait": "⏳ Building your upgrade plan… this takes a few seconds.",
+        "plan_none": ("📊 The chart needs your village export — send it and I'll build a plan "
+                      "(which upgrades to start and when, to max your Town Hall as fast as possible)."),
+        "plan_fail": "❌ Couldn't build the plan: {e}.",
+        "plan_title": "📊 <b>Upgrade plan</b> · {tag}",
+        "plan_body": ("Max Town Hall {th} → Town Hall {th1}\n"
+                      "🏁 All done: <b>{end}</b>\n"
+                      "🏰 Town Hall {th1}: <b>{th_end}</b>\n"
+                      "<i>Export from {ts} · sleep {bed}–{wake} · {tz}</i>\n\n"
+                      "The chart opens in your browser: the whole plan is inside the link and isn't stored anywhere. "
+                      "Tap bars to mark what you've started."),
+        "open": "📊 Open chart",
+        "tz_title": "🕐 <b>Time zone:</b> {tz}\n\nUsed for times in messages, quiet hours and the chart.",
+        "tz_ans": "Time zone: {tz}",
+        "tz_names": {0: "London (winter), Lisbon", 1: "London (summer), Berlin, Paris", 2: "Kyiv, Helsinki",
+                     3: "Moscow, Istanbul", 4: "Dubai, Baku", 5: "Kazakhstan, Tashkent", 6: "Bishkek, Omsk"},
         "no_data": ("📭 <b>No timers yet</b>\n\n"
                     "Send me your village export and I'll start tracking your upgrades and research.\n\n"
                     "<b>How to export</b>\n"
@@ -197,7 +231,7 @@ T = {
                  "<b>Buttons</b>\n"
                  "📋 Running — all timers\n⏭ Next — what finishes next\n"
                  "👷 Builders — when builders and the lab get free\n🌙 Quiet hours — don't wake me at night\n"
-                 "🏠 Menu — main menu\n🌐 Русский — переключить на русский\n/clear — forget all timers"),
+                 "📊 Chart — Town Hall upgrade plan (opens in your browser)\n🏠 Menu — main menu, with 🕐 time zone\n🌐 Русский — переключить на русский\n/clear — forget all timers"),
     },
 }
 BUTTONS = {lang: {v: k for k, v in T[lang]["btn"].items()} for lang in LANGS}  # текст кнопки -> действие
@@ -205,13 +239,35 @@ BUTTONS = {lang: {v: k for k, v in T[lang]["btn"].items()} for lang in LANGS}  #
 
 def keyboard(lang):
     b = T[lang]["btn"]
-    return {"keyboard": [[b["list"], b["next"]], [b["free"], b["quiet"]], [b["menu"], b["lang"]]],
+    return {"keyboard": [[b["list"], b["next"]], [b["free"], b["quiet"]], [b["plan"], b["menu"], b["lang"]]],
             "resize_keyboard": True, "is_persistent": True}
 
 
 def inline_nav(lang, *which):
-    """Кнопки под сообщением: главное меню / как пользоваться."""
+    """Кнопки под сообщением: главное меню / как пользоваться / часовой пояс."""
     return {"inline_keyboard": [[{"text": T[lang]["ibtn"][w], "callback_data": f"act:{w}"} for w in which]]}
+
+
+# ---------- часовой пояс чата ----------
+DEFAULT_TZ = 5          # Казахстан
+TZ_PRESETS = (0, 1, 2, 3, 4, 5, 6)
+
+
+def tz_label(hours):
+    return "UTC" + (f"{hours:+g}" if hours else "")
+
+
+def set_tz(chat):
+    """Все форматтеры времени и тихие часы работают в часовом поясе текущего чата."""
+    global TZ
+    TZ = timezone(timedelta(hours=chat.get("tz", DEFAULT_TZ)))
+
+
+def tz_view(chat):
+    L, cur = T[chat["lang"]], chat.get("tz", DEFAULT_TZ)
+    rows = [[{"text": ("✅ " if h == cur else "") + f"{tz_label(h)} · {L['tz_names'][h]}", "callback_data": f"tz:{h}"}]
+            for h in TZ_PRESETS]
+    return L["tz_title"].format(tz=f"{tz_label(cur)} ({L['tz_names'].get(cur, '')})"), {"inline_keyboard": rows}
 
 
 esc = html.escape
@@ -501,14 +557,56 @@ def get_chat(db, chat_id, user=None):
         code = ((user or {}).get("language_code") or "").lower()
         chat = db["chats"][str(chat_id)] = {"accounts": {}, "lang": "ru" if code.startswith(("ru", "kk", "uk", "be")) else "en"}
     chat.setdefault("lang", "ru")
+    set_tz(chat)
     return chat
+
+
+# ---------- график прокачки (планировщик из planner/coc_plan.py) ----------
+EXPORT_KEYS = ("tag", "timestamp", "buildings", "traps", "heroes", "units", "spells")
+
+
+def load_planner():
+    """coc_plan.py лежит рядом с ботом (рабочая папка) или в ../planner (репозиторий)."""
+    for d in (HERE, os.path.join(os.path.dirname(HERE), "planner")):
+        if os.path.exists(os.path.join(d, "coc_plan.py")):
+            if d not in sys.path:
+                sys.path.insert(0, d)
+            import coc_plan
+            return coc_plan
+    raise ValueError("не найден coc_plan.py")
+
+
+def plan_message(chat, tag, acc):
+    """(текст, кнопка-ссылка) для графика по последнему экспорту аккаунта."""
+    L, lang = T[chat["lang"]], chat["lang"]
+    planner = load_planner()
+    q = chat.get("quiet")
+    bed, wake = (to_min(q[0]), to_min(q[1])) if q else (planner.BED_MIN, planner.WAKE_MIN)
+    tz = chat.get("tz", DEFAULT_TZ)
+    plan = planner.make_plan(acc["export"], tz, bed, wake)
+    th_end = next((x["end"] for x in plan["schedule"] if x["did"] == 1000001), None)
+    d = lambda x: x.strftime("%d.%m %H:%M") if x else "—"
+    text = L["plan_title"].format(tag=esc(tag)) + "\n" + L["plan_body"].format(
+        th=plan["th"], th1=plan["th"] + 1, end=d(plan["end"]), th_end=d(th_end), ts=d(plan["start"]),
+        bed=f"{bed // 60:02d}:{bed % 60:02d}", wake=f"{wake // 60:02d}:{wake % 60:02d}", tz=tz_label(tz))
+    return text, {"inline_keyboard": [[{"text": L["open"], "url": planner.plan_link(plan, lang)}]]}
 
 
 def on_callback(tg, db, cb):
     chat_id = cb["message"]["chat"]["id"]
     chat = get_chat(db, chat_id, cb.get("from"))
     L, data = T[chat["lang"]], cb.get("data", "")
-    if data.startswith("quiet:"):
+    if data.startswith("tz:"):
+        chat["tz"] = float(data[3:]) if "." in data[3:] else int(data[3:])
+        set_tz(chat)
+        save(db)
+        text, markup = tz_view(chat)
+        try:
+            tg.edit(chat_id, cb["message"]["message_id"], text, markup)
+        except (RuntimeError, urllib.error.HTTPError):
+            pass
+        tg.answer(cb["id"], L["tz_ans"].format(tz=tz_label(chat["tz"])))
+    elif data.startswith("quiet:"):
         val = data[6:]
         chat["quiet"] = None if val == "off" else val.split("-")
         save(db)
@@ -563,7 +661,24 @@ def do_action(tg, db, chat, chat_id, action):
     if action == "help":
         return send(T[lang]["help"], inline_nav(lang, "menu")) or True
     if action == "menu":
-        return send(menu_text(chat), inline_nav(lang, "help")) or True  # остальные действия — в клавиатуре внизу
+        return send(menu_text(chat), inline_nav(lang, "help", "tz")) or True  # остальные действия — в клавиатуре внизу
+    if action == "tz":
+        t, markup = tz_view(chat)
+        return send(t, markup) or True
+    if action == "plan":
+        with_export = {t: a for t, a in chat.get("accounts", {}).items() if a.get("export")}
+        if not with_export:
+            return send(T[lang]["plan_none"], inline_nav(lang, "help")) or True
+        send(T[lang]["plan_wait"])
+        for tag, acc in sorted(with_export.items()):
+            try:
+                text, markup = plan_message(chat, tag, acc)
+            except Exception as e:  # неподдерживаемая ратуша, битый экспорт и т.п.
+                log("План не построен:", repr(e))
+                send(T[lang]["plan_fail"].format(e=esc(str(e))))
+                continue
+            send(text, markup)
+        return True
     if action == "list":
         return send(list_text(chat)) or True
     if action == "next":
@@ -593,7 +708,8 @@ def handle_export(tg, db, chat, chat_id, raw):
     chat.pop("buffer", None)
     for i in items:
         i["sent"] = i["end"] <= now
-    chat["accounts"][tag] = {"ts": ts, "items": items, "caps": caps}
+    chat["accounts"][tag] = {"ts": ts, "items": items, "caps": caps,
+                             "export": {k: data[k] for k in EXPORT_KEYS if k in data}}  # для графика
     save(db)
     done = [i for i in items if i["sent"]]
     out = [f"📥 <b>{esc(tag)}</b> · " + T[lang]["export_ok"].format(t=when(ts))]
@@ -670,6 +786,7 @@ def notify_due(tg, db):
     changed = False
     for chat_id, chat in db["chats"].items():
         chat.setdefault("lang", "ru")
+        set_tz(chat)  # время в уведомлении и тихие часы — в поясе этого чата
         if in_quiet(chat, now):
             continue  # ночью молчим — всё придёт одним сообщением после тихих часов
         for tag, acc in chat.get("accounts", {}).items():
@@ -698,6 +815,7 @@ def next_wakeup(db):
         if not ends:
             continue
         t = max(min(ends), now)
+        set_tz(chat)
         if chat.get("quiet") and in_quiet(chat, t):
             t += 60  # внутри тихих часов просто перепроверяем раз в минуту
         best = t if best is None else min(best, t)

@@ -56,7 +56,7 @@ check("Таймеров пока нет" in last()[1] and "Экспорт дан
 check(len(last()[2]["inline_keyboard"][0]) == 2, "под ней 2 кнопки (меню + как пользоваться)")
 coc_bot.on_callback(tg, db, CB(1, "act:menu"))
 check("Главное меню" in last()[1], "кнопка «Главное меню» работает")
-check([b["callback_data"] for b in last()[2]["inline_keyboard"][0]] == ["act:help"], "в меню только «Как пользоваться»")
+check([b["callback_data"] for b in last()[2]["inline_keyboard"][0]] == ["act:help", "act:tz"], "в меню «Как пользоваться» и «Часовой пояс»")
 coc_bot.on_message(tg, db, M(1, "привет"))
 check("Не понял" in last()[1], "мусорный текст → «Не понял»")
 coc_bot.on_message(tg, db, M(1, '{"a": 1}'))
@@ -106,6 +106,35 @@ check(db["chats"]["1"]["quiet"] == ["23:00", "07:00"] and "23:00–07:00" in tg.
 coc_bot.on_callback(tg, db, CB(1, "quiet:off"))
 check(db["chats"]["1"]["quiet"] is None, "тихие часы выключаются")
 
+print("3b. График и часовой пояс")
+coc_bot.on_message(tg, db, M(7, "📊 График"))
+check("нужен экспорт" in last()[1], "без экспорта — подсказка прислать экспорт")
+th8 = json.load(open(os.path.join(repo, "planner", "examples", "export_th8.json"), encoding="utf-8-sig"))
+th8["timestamp"] = now - 60
+coc_bot.on_message(tg, db, M(7, json.dumps(th8)))
+check("export" in db["chats"]["7"]["accounts"]["#EXAMPLE"], "экспорт сохранён для графика")
+n = len(tg.out)
+coc_bot.on_message(tg, db, M(7, "📊 График"))
+check(len(tg.out) == n + 2 and "Строю план" in tg.out[n][1], "сначала «строю план», потом результат")
+btn = last()[2]["inline_keyboard"][0][0]
+check(btn["url"].startswith("https://zhanibek-akhmetov.github.io/coc-notify-me/#p=") and len(btn["url"]) < 4000,
+      f"кнопка-ссылка на график ({len(btn['url'])} симв.)")
+check("Ратуша 8 на максимум → ратуша 9" in last()[1] and "UTC+5" in last()[1], "в сообщении план и часовой пояс")
+coc_bot.on_callback(tg, db, CB(7, "act:tz"))
+check("Часовой пояс" in last()[1] and len(last()[2]["inline_keyboard"]) == 7, "выбор часового пояса: 7 вариантов")
+t_before = db["chats"]["7"]["accounts"]["#EXAMPLE"]["ts"]
+coc_bot.on_callback(tg, db, CB(7, "tz:1"))
+check(db["chats"]["7"]["tz"] == 1 and "UTC+1" in tg.answers[-1], "часовой пояс сохраняется")
+coc_bot.on_message(tg, db, M(7, "📋 Что идёт"))
+coc_bot.set_tz(db["chats"]["7"])
+check(coc_bot.when(t_before) in last()[1], "время в списке — в выбранном поясе")
+coc_bot.on_message(tg, db, M(7, "/plan"))
+check("UTC+1" in last()[1], "график строится в выбранном поясе")
+coc_bot.on_callback(tg, db, CB(7, "tz:5"))
+coc_bot.on_message(tg, db, M(7, "🏠 Меню"))
+check([b["callback_data"] for b in last()[2]["inline_keyboard"][0]] == ["act:help", "act:tz"],
+      "в меню: «Как пользоваться» и «Часовой пояс»")
+
 print("4. Уведомления")
 acc = db["chats"]["1"]["accounts"]["#T"]
 for i in acc["items"]:
@@ -126,7 +155,7 @@ db["chats"]["1"]["quiet"] = None
 
 print("5. English")
 coc_bot.on_message(tg, db, M(1, "🌐 English"))
-check("Language: English" in last()[1] and last()[2]["keyboard"][2] == ["🏠 Menu", "🌐 Русский"], "переключение + английская клавиатура")
+check("Language: English" in last()[1] and last()[2]["keyboard"][2] == ["📊 Chart", "🏠 Menu", "🌐 Русский"], "переключение + английская клавиатура")
 coc_bot.on_message(tg, db, M(1, "📋 Running"))
 check("HOME VILLAGE" in last()[1] and "Cannon #2 → 7" in last()[1] and "Barbarian King → 4" in last()[1], "список на английском, названия переведены")
 coc_bot.on_message(tg, db, M(1, "👷 Builders"))

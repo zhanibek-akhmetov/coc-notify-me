@@ -20,11 +20,12 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PLANNER = os.path.join(REPO, "planner", "coc_plan.py")
 EXAMPLES = os.path.join(REPO, "planner", "examples")
 
-# таблицы берём прямо из coc_plan.py (всё до разбора экспорта)
-_ns = {}
-exec(open(PLANNER, encoding="utf-8-sig").read().split("# ---------- разбор экспорта ----------")[0], _ns)
-BUILD, COUNT, LAB, TH_UP = _ns["BUILD"], _ns["COUNT"], _ns["LAB"], _ns["TH_UP"]
-WAKE, BED = _ns["WAKE_MIN"], _ns["BED_MIN"]
+# таблицы берём прямо из coc_plan.py
+sys.path.insert(0, os.path.dirname(PLANNER))
+import coc_plan  # noqa: E402
+
+BUILD, COUNT, LAB, TH_UP = coc_plan.BUILD, coc_plan.COUNT, coc_plan.LAB, coc_plan.TH_UP
+WAKE, BED = coc_plan.WAKE_MIN, coc_plan.BED_MIN
 NAME_TO_BID = {v[0]: k for k, v in BUILD.items()}
 ITEM = re.compile(r"^(.*?)(?: #\d+)?(?: → (\d+)| \(постройка\))$")
 
@@ -135,7 +136,13 @@ def main():
         check(not errors, f"расписание корректно ({len(plan)} записей)", "; ".join(errors[:5]))
 
         html_text = open(os.path.join(work, f"plan_th{th}.html"), encoding="utf-8").read()
-        check(html_text.count("class='task'") > 0 and "const D=" in html_text, "HTML-график сгенерирован")
+        check("/*EMBEDDED_PLAN*/" not in html_text and "\"i\":[[" in html_text and "/*NAMES*/" not in html_text,
+              "HTML-график сгенерирован (данные и названия встроены)")
+        link = coc_plan.plan_link(coc_plan.make_plan(exp), "ru")
+        check(link.startswith(coc_plan.VIEWER_URL + "#p=") and len(link) < 4000, f"ссылка на график ({len(link)} симв.)")
+        back = json.loads(__import__("zlib").decompress(__import__("base64").urlsafe_b64decode(
+            link.split("#p=")[1] + "==")).decode())
+        check(back["th"] == th and len(back["i"]) == len(plan), "ссылка раскодируется обратно в тот же план")
 
         committed = os.path.join(EXAMPLES, f"plan_th{th}.json")
         if os.path.exists(committed):

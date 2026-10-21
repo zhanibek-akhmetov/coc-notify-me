@@ -33,7 +33,9 @@ Pure Python 3.9+, zero dependencies (standard library only). No pip install.
 - **📋 Running**: every timer in a clean aligned list (monospace time column, quote blocks).
 - **⏭ Next**: what finishes next in each village.
 - **👷 Builders**: how many builders are free, when busy ones free up, whether the lab is free.
-- **🌙 Quiet hours**: no pings at night, one "Good morning" summary instead.
+- **📊 Chart**: builds the fastest upgrade plan from your last export and sends a button that opens the interactive Gantt chart. The whole plan is packed into the link itself (after `#`), so it is never sent to a server or stored anywhere.
+- **🌙 Quiet hours**: no pings at night, one "Good morning" summary instead. The chart treats them as your sleep time.
+- **🕐 Time zone** (in the menu): times, quiet hours and the chart follow your zone.
 - **🌐 Russian / English**: UI and official in-game object names in both languages.
 - Accepts the export as text, as a file, or split across several messages (Telegram splits long texts).
 - Survives restarts: timers are stored in `bot_data.json`; anything that finished while the bot was off is sent on startup.
@@ -74,8 +76,8 @@ python bot/coc_bot.py --parse planner/examples/export_th7.json
 
 ```bash
 cd planner
-python coc_plan.py examples/export_th7.json   # → plan_th7.html + plan_th7.json
-python make_ics.py plan_th7.json               # → plan_th7.ics (import into iPhone / Google Calendar)
+python coc_plan.py examples/export_th8.json   # → plan_th8.html + plan_th8.json + a shareable link
+python make_ics.py plan_th8.json               # → plan_th8.ics (import into iPhone / Google Calendar)
 ```
 
 How it works:
@@ -85,7 +87,9 @@ How it works:
 - Tries a few dozen scheduling strategies and hundreds of research orders, and keeps the one that finishes earliest.
 - The HTML chart lets you tap any bar or list row to mark it as "started"; marks are saved in the browser.
 
-Supported Town Halls: 5, 6, 7 (adding more = adding their tables to `coc_plan.py`).
+Supported Town Halls: 5–8 (adding more = adding their tables to `coc_plan.py`).
+
+Options: `--tz 1` (time zone, default UTC+5), `--lang en`. The chart page is one template ([`planner/chart_template.src.html`](planner/chart_template.src.html)) used three ways: the offline `plan_thN.html`, the demo on GitHub Pages, and the viewer for links from the bot (`…/coc-notify-me/#p=<compressed plan>`). After editing it, run `python planner/build_template.py`.
 
 ---
 
