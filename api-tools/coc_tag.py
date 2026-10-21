@@ -4,7 +4,11 @@
 """
 import json, os, sys, urllib.request, urllib.parse, urllib.error
 
-API_KEY = os.environ["COC_API_KEY"]
+API_KEY = os.environ.get("COC_API_KEY")
+if not API_KEY:
+    sys.exit("Задай ключ в переменной COC_API_KEY (ключ: developer.clashofclans.com)")
+if len(sys.argv) < 2:
+    sys.exit('Запуск: python coc_tag.py "#ТЕГ"')
 tag = sys.argv[1] if sys.argv[1].startswith("#") else "#" + sys.argv[1]
 
 for kind in ("players", "clans"):

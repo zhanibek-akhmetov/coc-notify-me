@@ -5,7 +5,11 @@
 """
 import json, os, sys, urllib.request, urllib.parse, urllib.error
 
-API_KEY = os.environ["COC_API_KEY"]
+API_KEY = os.environ.get("COC_API_KEY")
+if not API_KEY:
+    sys.exit("Задай ключ в переменной COC_API_KEY (ключ: developer.clashofclans.com)")
+if len(sys.argv) < 3:
+    sys.exit('Запуск: python coc_warlog_year.py 2015 "#ТЕГ1" "#ТЕГ2"')
 BASE = "https://api.clashofclans.com/v1"
 
 
