@@ -113,9 +113,14 @@ th8 = json.load(open(os.path.join(repo, "planner", "examples", "export_th8.json"
 th8["timestamp"] = now - 60
 coc_bot.on_message(tg, db, M(7, json.dumps(th8)))
 check("export" in db["chats"]["7"]["accounts"]["#EXAMPLE"], "экспорт сохранён для графика")
-n = len(tg.out)
 coc_bot.on_message(tg, db, M(7, "📊 График"))
-check(len(tg.out) == n + 2 and "Строю план" in tg.out[n][1], "сначала «строю план», потом результат")
+opts = [b[0]["callback_data"] for b in last()[2]["inline_keyboard"]]
+check("Что учитывать" in last()[1] and opts == ["po:lab", "po:heroes", "po:res", "po:go"],
+      "сначала выбор: лаборатория, герои, ресурсные здания + «Построить»")
+check(all(b[0]["text"].startswith("✅") for b in last()[2]["inline_keyboard"][:3]), "по умолчанию всё отмечено")
+n = len(tg.out)
+coc_bot.on_callback(tg, db, CB(7, "po:go"))
+check(len(tg.out) == n + 2 and "Строю план" in tg.out[n][1], "«Построить»: сначала «строю план», потом результат")
 btn = last()[2]["inline_keyboard"][0][0]
 check(btn["url"].startswith("https://zhanibek-akhmetov.github.io/coc-notify-me/#p=") and len(btn["url"]) < 4000,
       f"кнопка-ссылка на график ({len(btn['url'])} симв.)")
@@ -129,7 +134,18 @@ coc_bot.on_message(tg, db, M(7, "📋 Что идёт"))
 coc_bot.set_tz(db["chats"]["7"])
 check(coc_bot.when(t_before) in last()[1], "время в списке — в выбранном поясе")
 coc_bot.on_message(tg, db, M(7, "/plan"))
+coc_bot.on_callback(tg, db, CB(7, "po:go"))
 check("UTC+1" in last()[1], "график строится в выбранном поясе")
+import base64, zlib  # noqa: E402
+unpack = lambda url: json.loads(zlib.decompress(base64.urlsafe_b64decode(url.split("#p=")[1] + "==")).decode())
+coc_bot.on_callback(tg, db, CB(7, "po:heroes"))
+check(db["chats"]["7"]["plan_opts"]["heroes"] is False, "галочка «Герои» снимается и запоминается")
+coc_bot.on_callback(tg, db, CB(7, "po:go"))
+P = unpack(last()[2]["inline_keyboard"][0][0]["url"])
+heroes_planned = [x for x in P["i"] if x[3] in (28000000, 28000001) and x[7] != "c"]
+check(P["o"] == [1, 0, 1] and not heroes_planned and "герои" not in last()[1].split("Учтено:")[1].split("\n")[0],
+      "без героев: в плане нет улучшений героев, в сообщении «Учтено» без героев")
+coc_bot.on_callback(tg, db, CB(7, "po:heroes"))
 coc_bot.on_callback(tg, db, CB(7, "tz:5"))
 coc_bot.on_message(tg, db, M(7, "🏠 Меню"))
 check([b["callback_data"] for b in last()[2]["inline_keyboard"][0]] == ["act:help", "act:tz"],

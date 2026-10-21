@@ -150,6 +150,23 @@ def main():
             check(same, "пример в репозитории совпадает с тем, что генерирует код",
                   "перегенерируй: cd planner/examples && python ../coc_plan.py " + name)
 
+        # что брать в расчёт: без лаборатории / героев / ресурсных зданий
+        planned = lambda p, cond: [x for x in p["schedule"] if x["res"] != "-" and cond(x)]
+        no_lab = coc_plan.make_plan(exp, parts={"lab": False})
+        check(not planned(no_lab, lambda x: x["kind"] == "лаборатория"), "без лаборатории — ни одного нового исследования")
+        no_her = coc_plan.make_plan(exp, parts={"heroes": False})
+        check(not planned(no_her, lambda x: x["did"] in coc_plan.HEROES), "без героев — ни одного улучшения героя")
+        no_res = coc_plan.make_plan(exp, parts={"res": False})
+        check(not planned(no_res, lambda x: x["did"] in coc_plan.RESOURCE_BUILDINGS),
+              "без ресурсных зданий — ни шахт, ни сборщиков, ни хранилищ")
+        full_builds = len(planned(coc_plan.make_plan(exp), lambda x: x["kind"] == "стройка"))
+        check(len(planned(no_res, lambda x: x["kind"] == "стройка")) < full_builds, "исключение сокращает план")
+        for name_, p in (("без лаборатории", no_lab), ("без героев", no_her), ("без ресурсов", no_res)):
+            for x in p["schedule"]:
+                x["start"], x["end"] = x["start"].isoformat(), x["end"].isoformat()
+            errs = [e for e in validate(exp, copy.deepcopy(p["schedule"])) if "не доведено" not in e]
+            check(not errs, f"расписание «{name_}» без наложений и ночных стартов", "; ".join(errs[:3]))
+
         # валидатор должен ловить поломки
         broken = copy.deepcopy(plan)
         builds = [x for x in broken if x["kind"] == "стройка" and x["res"] != "-"]

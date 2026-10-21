@@ -91,10 +91,16 @@ T = {
         "plan_body": ("Ратуша {th} на максимум → ратуша {th1}\n"
                       "🏁 Всё готово: <b>{end}</b>\n"
                       "🏰 Ратуша {th1}: <b>{th_end}</b>\n"
+                      "{parts}\n"
                       "<i>Экспорт от {ts} · сон {bed}–{wake} · {tz}</i>\n\n"
                       "График открывается в браузере: весь план зашит в ссылку и нигде не сохраняется. "
                       "Нажимай на полоски — отмечай, что уже поставил."),
         "open": "📊 Открыть график",
+        "po_title": "📊 <b>Что учитывать в графике?</b>\nОтметь нужное и нажми «Построить». Строители и ратуша учитываются всегда.",
+        "po_parts": {"lab": "🧪 Лаборатория", "heroes": "👑 Герои", "res": "💰 Ресурсные здания"},
+        "po_go": "📊 Построить график",
+        "plan_parts": "Учтено: {x}",
+        "plan_parts_base": "строения",
         "tz_title": "🕐 <b>Часовой пояс:</b> {tz}\n\nВ нём показываю время, считаю тихие часы и строю график.",
         "tz_ans": "Часовой пояс: {tz}",
         "tz_names": {0: "Лондон (зима), Лиссабон", 1: "Лондон (лето), Берлин, Париж", 2: "Киев, Хельсинки",
@@ -172,10 +178,16 @@ T = {
         "plan_body": ("Max Town Hall {th} → Town Hall {th1}\n"
                       "🏁 All done: <b>{end}</b>\n"
                       "🏰 Town Hall {th1}: <b>{th_end}</b>\n"
+                      "{parts}\n"
                       "<i>Export from {ts} · sleep {bed}–{wake} · {tz}</i>\n\n"
                       "The chart opens in your browser: the whole plan is inside the link and isn't stored anywhere. "
                       "Tap bars to mark what you've started."),
         "open": "📊 Open chart",
+        "po_title": "📊 <b>What should the chart include?</b>\nTick what you need and tap «Build». Buildings and the Town Hall are always included.",
+        "po_parts": {"lab": "🧪 Laboratory", "heroes": "👑 Heroes", "res": "💰 Resource buildings"},
+        "po_go": "📊 Build chart",
+        "plan_parts": "Included: {x}",
+        "plan_parts_base": "buildings",
         "tz_title": "🕐 <b>Time zone:</b> {tz}\n\nUsed for times in messages, quiet hours and the chart.",
         "tz_ans": "Time zone: {tz}",
         "tz_names": {0: "London (winter), Lisbon", 1: "London (summer), Berlin, Paris", 2: "Kyiv, Helsinki",
@@ -576,6 +588,22 @@ def load_planner():
     raise ValueError("не найден coc_plan.py")
 
 
+PLAN_PARTS = ("lab", "heroes", "res")
+
+
+def plan_parts(chat):
+    """Что брать в расчёт графика (запоминается для чата; по умолчанию — всё)."""
+    return dict({p: True for p in PLAN_PARTS}, **chat.get("plan_opts", {}))
+
+
+def plan_options_view(chat):
+    L, parts = T[chat["lang"]], plan_parts(chat)
+    rows = [[{"text": ("✅ " if parts[p] else "⬜ ") + L["po_parts"][p], "callback_data": f"po:{p}"}]
+            for p in PLAN_PARTS]
+    rows.append([{"text": L["po_go"], "callback_data": "po:go"}])
+    return L["po_title"], {"inline_keyboard": rows}
+
+
 def plan_message(chat, tag, acc):
     """(текст, кнопка-ссылка) для графика по последнему экспорту аккаунта."""
     L, lang = T[chat["lang"]], chat["lang"]
@@ -583,20 +611,58 @@ def plan_message(chat, tag, acc):
     q = chat.get("quiet")
     bed, wake = (to_min(q[0]), to_min(q[1])) if q else (planner.BED_MIN, planner.WAKE_MIN)
     tz = chat.get("tz", DEFAULT_TZ)
-    plan = planner.make_plan(acc["export"], tz, bed, wake)
+    parts = plan_parts(chat)
+    plan = planner.make_plan(acc["export"], tz, bed, wake, parts=parts)
     th_end = next((x["end"] for x in plan["schedule"] if x["did"] == 1000001), None)
     d = lambda x: x.strftime("%d.%m %H:%M") if x else "—"
+    included = [L["plan_parts_base"]] + [L["po_parts"][p].split(" ", 1)[1].lower() for p in PLAN_PARTS if parts[p]]
     text = L["plan_title"].format(tag=esc(tag)) + "\n" + L["plan_body"].format(
         th=plan["th"], th1=plan["th"] + 1, end=d(plan["end"]), th_end=d(th_end), ts=d(plan["start"]),
-        bed=f"{bed // 60:02d}:{bed % 60:02d}", wake=f"{wake // 60:02d}:{wake % 60:02d}", tz=tz_label(tz))
+        bed=f"{bed // 60:02d}:{bed % 60:02d}", wake=f"{wake // 60:02d}:{wake % 60:02d}", tz=tz_label(tz),
+        parts=L["plan_parts"].format(x=", ".join(included)))
     return text, {"inline_keyboard": [[{"text": L["open"], "url": planner.plan_link(plan, lang)}]]}
+
+
+def build_plans(tg, chat, chat_id):
+    """Строит и присылает график по каждому аккаунту чата, у которого есть экспорт."""
+    lang = chat["lang"]
+    send = lambda text, markup=None: tg.send(chat_id, text, markup or keyboard(lang))
+    with_export = {t: a for t, a in chat.get("accounts", {}).items() if a.get("export")}
+    if not with_export:
+        return send(T[lang]["plan_none"], inline_nav(lang, "help"))
+    send(T[lang]["plan_wait"])
+    for tag, acc in sorted(with_export.items()):
+        try:
+            text, markup = plan_message(chat, tag, acc)
+        except Exception as e:  # неподдерживаемая ратуша, битый экспорт и т.п.
+            log("План не построен:", repr(e))
+            send(T[lang]["plan_fail"].format(e=esc(str(e))))
+            continue
+        send(text, markup)
 
 
 def on_callback(tg, db, cb):
     chat_id = cb["message"]["chat"]["id"]
     chat = get_chat(db, chat_id, cb.get("from"))
     L, data = T[chat["lang"]], cb.get("data", "")
-    if data.startswith("tz:"):
+    if data.startswith("po:"):
+        part = data[3:]
+        if part == "go":
+            tg.answer(cb["id"])
+            build_plans(tg, chat, chat_id)
+            return
+        if part in PLAN_PARTS:
+            opts = plan_parts(chat)
+            opts[part] = not opts[part]
+            chat["plan_opts"] = opts
+            save(db)
+            text, markup = plan_options_view(chat)
+            try:
+                tg.edit(chat_id, cb["message"]["message_id"], text, markup)
+            except (RuntimeError, urllib.error.HTTPError):
+                pass
+        tg.answer(cb["id"])
+    elif data.startswith("tz:"):
         chat["tz"] = float(data[3:]) if "." in data[3:] else int(data[3:])
         set_tz(chat)
         save(db)
@@ -666,19 +732,10 @@ def do_action(tg, db, chat, chat_id, action):
         t, markup = tz_view(chat)
         return send(t, markup) or True
     if action == "plan":
-        with_export = {t: a for t, a in chat.get("accounts", {}).items() if a.get("export")}
-        if not with_export:
+        if not any(a.get("export") for a in chat.get("accounts", {}).values()):
             return send(T[lang]["plan_none"], inline_nav(lang, "help")) or True
-        send(T[lang]["plan_wait"])
-        for tag, acc in sorted(with_export.items()):
-            try:
-                text, markup = plan_message(chat, tag, acc)
-            except Exception as e:  # неподдерживаемая ратуша, битый экспорт и т.п.
-                log("План не построен:", repr(e))
-                send(T[lang]["plan_fail"].format(e=esc(str(e))))
-                continue
-            send(text, markup)
-        return True
+        t, markup = plan_options_view(chat)  # сначала — что учитывать, потом «Построить»
+        return send(t, markup) or True
     if action == "list":
         return send(list_text(chat)) or True
     if action == "next":

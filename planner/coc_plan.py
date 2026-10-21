@@ -1,6 +1,6 @@
 ﻿"""План прокачки текущей ратуши до максимума + улучшение до следующей, по экспорту деревни.
 
-Запуск:  python coc_plan.py export.json [--tz 5] [--lang ru|en]
+Запуск:  python coc_plan.py export.json [--tz 5] [--lang ru|en] [--no-lab] [--no-heroes] [--no-res]
 Результат: plan_th<N>.json и plan_th<N>.html (N — текущий уровень ратуши).
 Как модуль (так его вызывает бот): make_plan(export, tz_hours, bed, wake) → plan_link(plan, lang).
 Поддерживаются ратуши 5–8.
@@ -135,11 +135,21 @@ LAB = {
 }
 LAB_RES = {4000010: D, 4000011: D, 4000012: D, 4000013: D, 26000009: D, 26000010: D}  # остальное — за эликсир
 
+HEROES = {28000000, 28000001}
+RESOURCE_BUILDINGS = {1000002, 1000003, 1000004, 1000005, 1000023, 1000024}  # шахты, сборщики, скважины, хранилища
+ALL_PARTS = {"lab": True, "heroes": True, "res": True}
+
 # ---------- разбор экспорта ----------
 
 
-def make_plan(exp, tz_hours=DEFAULT_TZ, bed_min=BED_MIN, wake_min=WAKE_MIN):
-    """Расписание по экспорту. Время — в часовом поясе tz_hours, ночь — с bed_min до wake_min (минуты от полуночи)."""
+def make_plan(exp, tz_hours=DEFAULT_TZ, bed_min=BED_MIN, wake_min=WAKE_MIN, parts=None):
+    """Расписание по экспорту. Время — в часовом поясе tz_hours, ночь — с bed_min до wake_min (минуты от полуночи).
+
+    parts — что брать в расчёт: {"lab": исследования, "heroes": герои, "res": ресурсные здания}.
+    Исключённое не планируется, но то, что уже идёт, по-прежнему занимает строителя / лабораторию.
+    """
+    parts = dict(ALL_PARTS, **(parts or {}))
+    skip = (HEROES if not parts["heroes"] else set()) | (RESOURCE_BUILDINGS if not parts["res"] else set())
     tz = timezone(timedelta(hours=tz_hours))
     start = datetime.fromtimestamp(int(exp["timestamp"]), tz).replace(tzinfo=None, second=0)
     th = next(b["lvl"] for b in exp["buildings"] if b["data"] == 1000001)
@@ -154,6 +164,8 @@ def make_plan(exp, tz_hours=DEFAULT_TZ, bed_min=BED_MIN, wake_min=WAKE_MIN):
 
     def add_chain(bid, inst, num, lvl, prev, first):
         name, res, ups = BUILD[bid]
+        if bid in skip:
+            return  # не в расчёте (уже идущее улучшение при этом остаётся в busy)
         for target in sorted(ups):
             cost, dur, th_req = ups[target]
             if target <= lvl or th_req > th:
@@ -236,6 +248,8 @@ def make_plan(exp, tz_hours=DEFAULT_TZ, bed_min=BED_MIN, wake_min=WAKE_MIN):
             lab_busy_until = start + timedelta(minutes=int(units[uid]["timer"]) // 60)
             lab_running = [(prev, int(units[uid]["timer"]) // 60)]
             lvl += 1
+        if not parts["lab"]:
+            continue  # исследования не в расчёте — показываем только то, что уже идёт
         for target in sorted(ups):
             cost, dur, need_lab = ups[target]
             if target <= lvl or need_lab > lab_max:
@@ -374,7 +388,7 @@ def make_plan(exp, tz_hours=DEFAULT_TZ, bed_min=BED_MIN, wake_min=WAKE_MIN):
         x["did"], x["lvl"], x["num"], x["new"] = meta.get(tid, (0, 0, 0, False))
 
     total = lambda r: sum(x["cost"] for x in schedule if x["res"] == r) + sum(i["cost"] for i in instant if i["res"] == r)
-    return dict(tag=exp.get("tag", "?"), th=th, tz=tz_hours, bed=bed_min, wake=wake_min, start=start,
+    return dict(tag=exp.get("tag", "?"), th=th, tz=tz_hours, bed=bed_min, wake=wake_min, start=start, parts=parts,
                 end=max(x["end"] for x in schedule), schedule=schedule, instant=instant, walls=walls,
                 wall_gold=wall_gold, wall_any=wall_any, gold=total(G), elixir=total(E), dark=total(D))
 
@@ -400,7 +414,8 @@ def payload(plan, lang="ru"):
             "bed": plan["bed"], "wake": plan["wake"], "i": items,
             "k": [plan["gold"], plan["elixir"], plan["dark"], plan["wall_gold"], plan["wall_any"]],
             "x": [[i["did"], i["lvl"], RES_CODE.get(i["res"], "g"), i["cost"]] for i in plan["instant"]],
-            "w": [[lvl, n] for lvl, n in sorted(plan["walls"].items()) if n], "wm": WALL_MAX[plan["th"]]}
+            "w": [[lvl, n] for lvl, n in sorted(plan["walls"].items()) if n], "wm": WALL_MAX[plan["th"]],
+            "o": [int(plan["parts"][p]) for p in ("lab", "heroes", "res")]}
 
 
 def encode(data):
@@ -428,8 +443,9 @@ def main():
     path = next((a for a in args if not a.startswith("--") and a not in (opt("--tz", ""), opt("--lang", ""))),
                 "export.json")
     exp = json.load(open(path, encoding="utf-8-sig"))
+    parts = {"lab": "--no-lab" not in args, "heroes": "--no-heroes" not in args, "res": "--no-res" not in args}
     try:
-        plan = make_plan(exp, tz_hours)
+        plan = make_plan(exp, tz_hours, parts=parts)
     except ValueError as e:
         sys.exit(f"Ошибка: {e}")
     fmt = lambda d: d.strftime("%d.%m %H:%M")
