@@ -1,0 +1,125 @@
+# CoC Notify Me
+
+**A Telegram bot that pings you when your Clash of Clans upgrades finish, plus an upgrade planner that builds a Gantt chart of the fastest way to max your Town Hall.**
+
+Pure Python 3.9+, zero dependencies (standard library only). No pip install.
+
+[Русская версия ниже ↓](#-по-русски)
+
+> Unofficial fan project, not affiliated with Supercell.
+
+---
+
+## ✨ What's inside
+
+| Part | What it does |
+|---|---|
+| 🤖 [`bot/`](bot/) | Telegram bot: paste your in-game village export → get a message the moment each building, research or hero upgrade finishes. Home Village and Builder Base. |
+| 📊 [`planner/`](planner/) | Reads the same export and simulates 5 builders + the laboratory to find the fastest order to max the current Town Hall and upgrade to the next one. Outputs an interactive HTML Gantt chart and an `.ics` calendar. |
+| 🔎 [`api-tools/`](api-tools/) | Small scripts for the official Clash of Clans API: clan war log, current war, CWL, player/clan lookup by tag. |
+
+**Live demo of the planner:** open [`docs/index.html`](docs/index.html), or the GitHub Pages link once Pages is enabled (Settings → Pages → `main` / `docs`).
+
+---
+
+## 🤖 Telegram bot
+
+### Features
+- **Notifications** when an upgrade finishes, grouped by village, with the next thing to finish.
+- **📋 Running**: every timer in a clean aligned list (monospace time column, quote blocks).
+- **⏭ Next**: what finishes next in each village.
+- **👷 Builders**: how many builders are free, when busy ones free up, whether the lab is free.
+- **🌙 Quiet hours**: no pings at night, one "Good morning" summary instead.
+- **🌐 Russian / English**: UI and official in-game object names in both languages.
+- Accepts the export as text, as a file, or split across several messages (Telegram splits long texts).
+- Survives restarts: timers are stored in `bot_data.json`; anything that finished while the bot was off is sent on startup.
+
+### Example
+```
+📋 #EXAMPLE · export 18:14
+
+🏠 HOME VILLAGE
+👷 1/5  ·  🧪 busy
+┃   10m 🔨 Cannon #1 → 8
+┃2h 42m 🧪 Balloon → 4
+
+🛠 BUILDER BASE
+👷 0/1  ·  🧪 free
+┃1h 58m 🔨 Army Camp — new
+```
+
+### Run it
+1. Create a bot with [@BotFather](https://t.me/BotFather) (`/newbot`) and copy the token.
+2. Put the token into `bot/bot_token.txt` (this file is git-ignored) or set `TELEGRAM_BOT_TOKEN`.
+3. Start it:
+   ```bash
+   python bot/coc_bot.py
+   ```
+4. In the game: **Settings → More Settings → Data Export → Copy**, then paste it into the chat with your bot.
+
+Check parsing without Telegram:
+```bash
+python bot/coc_bot.py --parse planner/examples/export_th7.json
+```
+
+**Run 24/7 on Windows:** create a Task Scheduler task that runs `pythonw.exe bot\coc_bot.py` at log on, with "restart on failure". The bot logs to `bot/bot.log` and waits for the network after boot.
+
+---
+
+## 📊 Upgrade planner
+
+```bash
+cd planner
+python coc_plan.py examples/export_th7.json   # → plan_th7.html + plan_th7.json
+python make_ics.py plan_th7.json               # → plan_th7.ics (import into iPhone / Google Calendar)
+```
+
+How it works:
+- Parses the export: current levels, running timers, missing buildings, unlocked troops and spells.
+- Builds upgrade chains from current level to the Town Hall cap (costs and times from the Clash of Clans Wiki), including research dependencies (e.g. Wizard needs Barracks 7 and Lab 3, Dragon needs Barracks 9).
+- Simulates 5 builders and the laboratory with a sleep window (no new upgrades 00:30–08:00): long upgrades go overnight, short ones fill the day.
+- Tries a few dozen scheduling strategies and hundreds of research orders, and keeps the one that finishes earliest.
+- The HTML chart lets you tap any bar or list row to mark it as "started"; marks are saved in the browser.
+
+Supported Town Halls: 5, 6, 7 (adding more = adding their tables to `coc_plan.py`).
+
+---
+
+## 🔎 API tools
+
+Need a free key from [developer.clashofclans.com](https://developer.clashofclans.com) (keys are bound to your IP).
+
+```bash
+set COC_API_KEY=your_key            # PowerShell: $env:COC_API_KEY="your_key"
+python api-tools/coc_war.py "#CLANTAG"            # current war, war log, CWL → clans/<tag>/
+python api-tools/coc_warlog_year.py 2015 "#CLANTAG"  # full war log filtered by year
+python api-tools/coc_tag.py "#TAG"                # is it a player or a clan?
+python api-tools/coc_war_hunt.py                  # recover full old wars via opponents' currentwar
+```
+
+---
+
+## 🗂 Project structure
+```
+bot/          coc_bot.py, coc_names.json (RU/EN names), build_names.py
+planner/      coc_plan.py, make_ics.py, examples/
+api-tools/    coc_war.py, coc_war_hunt.py, coc_warlog_year.py, coc_tag.py
+docs/         index.html (demo chart for GitHub Pages)
+```
+
+Code comments are in Russian.
+
+---
+
+## 🇷🇺 По-русски
+
+**CoC Notify Me** — Telegram-бот, который присылает уведомление, когда в Clash of Clans завершается стройка, исследование или улучшение героя, и планировщик, который строит диаграмму Ганта с самым быстрым порядком прокачки ратуши.
+
+- **Бот:** пришли ему экспорт деревни (Настройки → Другие настройки → Экспорт данных → Копировать). Кнопки: 📋 Что идёт, ⏭ Ближайшее, 👷 Свободные, 🌙 Тихие часы, 🌐 English.
+- **Планировщик:** `python planner/coc_plan.py export.json` → HTML-график с отметками «поставил в работу» и календарь `.ics` для айфона.
+- **API-инструменты:** журнал клановых войн, текущая война, ЛВК, поиск по тегу.
+
+Только стандартная библиотека Python, ничего устанавливать не нужно. Неофициальный фан-проект, не связан с Supercell.
+
+## License
+MIT — see [LICENSE](LICENSE).

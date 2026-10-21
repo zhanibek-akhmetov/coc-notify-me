@@ -1,0 +1,1574 @@
+{
+ "1000000": {
+  "en": "Army Camp",
+  "ru": "Военный лагерь",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000001": {
+  "en": "Town Hall",
+  "ru": "Ратуша",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000002": {
+  "en": "Elixir Collector",
+  "ru": "Сборщик эликсира",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000003": {
+  "en": "Elixir Storage",
+  "ru": "Хранилище эликсира",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000004": {
+  "en": "Gold Mine",
+  "ru": "Золотая шахта",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000005": {
+  "en": "Gold Storage",
+  "ru": "Хранилище золота",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000006": {
+  "en": "Barracks",
+  "ru": "Казармы",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000007": {
+  "en": "Laboratory",
+  "ru": "Лаборатория",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000008": {
+  "en": "Cannon",
+  "ru": "Пушка",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000009": {
+  "en": "Archer Tower",
+  "ru": "Башня лучниц",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000010": {
+  "en": "Wall",
+  "ru": "Стена",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000011": {
+  "en": "Wizard Tower",
+  "ru": "Башня колдуна",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000012": {
+  "en": "Air Defense",
+  "ru": "Воздушная оборона",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000013": {
+  "en": "Mortar",
+  "ru": "Мортира",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000014": {
+  "en": "Clan Castle",
+  "ru": "Крепость клана",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000015": {
+  "en": "Builder's Hut",
+  "ru": "Хижина строителя",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000019": {
+  "en": "Hidden Tesla",
+  "ru": "Потайная тесла",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000020": {
+  "en": "Spell Factory",
+  "ru": "Фабрика заклинаний",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000021": {
+  "en": "X-Bow",
+  "ru": "Арбалет",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000023": {
+  "en": "Dark Elixir Drill",
+  "ru": "Скважина черного эликсира",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000024": {
+  "en": "Dark Elixir Storage",
+  "ru": "Хранилище черного эликсира",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000026": {
+  "en": "Dark Barracks",
+  "ru": "Темная казарма",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000027": {
+  "en": "Inferno Tower",
+  "ru": "Адская башня",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000028": {
+  "en": "Air Sweeper",
+  "ru": "Чистильщик",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000029": {
+  "en": "Dark Spell Factory",
+  "ru": "Фабрика темных заклинаний",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000031": {
+  "en": "Eagle Artillery",
+  "ru": "Орлиная артиллерия",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000032": {
+  "en": "Bomb Tower",
+  "ru": "Башня-бомбежка",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000033": {
+  "en": "Wall",
+  "ru": "Стена",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000034": {
+  "en": "Builder Hall",
+  "ru": "Дом строителя",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000035": {
+  "en": "Elixir Collector",
+  "ru": "Сборщик эликсира",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000036": {
+  "en": "Elixir Storage",
+  "ru": "Хранилище эликсира",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000037": {
+  "en": "Gold Mine",
+  "ru": "Золотая шахта",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000038": {
+  "en": "Gold Storage",
+  "ru": "Хранилище золота",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000039": {
+  "en": "Clock Tower",
+  "ru": "Часовая башня",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000040": {
+  "en": "Builder Barracks",
+  "ru": "Казарма строителя",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000041": {
+  "en": "Double Cannon",
+  "ru": "Двойная пушка",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000042": {
+  "en": "Army Camp",
+  "ru": "Военный лагерь",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000043": {
+  "en": "Hidden Tesla",
+  "ru": "Потайная тесла",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000044": {
+  "en": "Cannon",
+  "ru": "Пушка",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000045": {
+  "en": "Multi Mortar",
+  "ru": "Мультимортира",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000046": {
+  "en": "Star Laboratory",
+  "ru": "Обсерватория",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000047": {
+  "en": "Master Builder's Hut",
+  "ru": "Хижина главного строителя",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000048": {
+  "en": "Archer Tower",
+  "ru": "Башня лучниц",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000049": {
+  "en": "Reinforcement Camp",
+  "ru": "Лагерь подкрепления",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000050": {
+  "en": "Firecrackers",
+  "ru": "Фейерверки",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000051": {
+  "en": "Guard Post",
+  "ru": "Караульная",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000052": {
+  "en": "Mega Tesla",
+  "ru": "Мегатесла",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000053": {
+  "en": "Battle Machine",
+  "ru": "Боевая машина",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000054": {
+  "en": "Air Bombs",
+  "ru": "Воздушные бомбы",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000055": {
+  "en": "Crusher",
+  "ru": "Дробильщик",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000056": {
+  "en": "Roaster",
+  "ru": "Жаровня",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000057": {
+  "en": "Giant Cannon",
+  "ru": "Гигантская пушка",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000058": {
+  "en": "Gem Mine",
+  "ru": "Рудник с кристаллами",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000059": {
+  "en": "Workshop",
+  "ru": "Мастерская",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000063": {
+  "en": "Lava Launcher",
+  "ru": "Источник лавы",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000064": {
+  "en": "B.O.B's Hut",
+  "ru": "Хижина Б.О.Б.О.",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000065": {
+  "en": "B.O.B Control",
+  "ru": "База Б.О.Б.О.",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000067": {
+  "en": "Scattershot",
+  "ru": "Швырятель",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000068": {
+  "en": "Pet House",
+  "ru": "Дом для животных",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000070": {
+  "en": "Blacksmith",
+  "ru": "Плавильня",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000071": {
+  "en": "Hero Hall",
+  "ru": "Зал героев",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000072": {
+  "en": "Spell Tower",
+  "ru": "Башня заклинаний",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000077": {
+  "en": "Monolith",
+  "ru": "Монолит",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000078": {
+  "en": "O.T.T.O's Outpost",
+  "ru": "Аванпост O.T.T.O.",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000079": {
+  "en": "Multi-Gear Tower",
+  "ru": "Пушкострельная башня",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000080": {
+  "en": "Battle Copter",
+  "ru": "Боевой вертолет",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000081": {
+  "en": "X-Bow",
+  "ru": "Арбалет",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000082": {
+  "en": "Healing Hut",
+  "ru": "Исцеляющая хижина",
+  "section": "buildings",
+  "village": "builderBase"
+ },
+ "1000083": {
+  "en": "Sour Elixir Cauldron",
+  "ru": "Котел с кислым эликсиром",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000084": {
+  "en": "Multi-Archer Tower",
+  "ru": "Башня, полная лучниц",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000085": {
+  "en": "Ricochet Cannon",
+  "ru": "Рикошетная пушка",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000086": {
+  "en": "Revenge Tower",
+  "ru": "Башня возмездия",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000089": {
+  "en": "Firespitter",
+  "ru": "Огнепушка",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000093": {
+  "en": "Helper Hut",
+  "ru": "Хижина помощников",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000097": {
+  "en": "Crafting Station",
+  "ru": "Ремесленный станок",
+  "section": "buildings",
+  "village": "home"
+ },
+ "1000102": {
+  "en": "Super Wizard Tower",
+  "ru": "Башня суперколдунов",
+  "section": "buildings",
+  "village": "home"
+ },
+ "107000000": {
+  "en": "Longshot",
+  "ru": "Снайперша",
+  "section": "guardians",
+  "village": "home"
+ },
+ "107000001": {
+  "en": "Smasher",
+  "ru": "Крушила",
+  "section": "guardians",
+  "village": "home"
+ },
+ "12000000": {
+  "en": "Bomb",
+  "ru": "Бомба",
+  "section": "traps",
+  "village": "home"
+ },
+ "12000001": {
+  "en": "Spring Trap",
+  "ru": "Ловушка-пружина",
+  "section": "traps",
+  "village": "home"
+ },
+ "12000002": {
+  "en": "Giant Bomb",
+  "ru": "Гигантская бомба",
+  "section": "traps",
+  "village": "home"
+ },
+ "12000005": {
+  "en": "Air Bomb",
+  "ru": "Воздушная бомба",
+  "section": "traps",
+  "village": "home"
+ },
+ "12000006": {
+  "en": "Seeking Air Mine",
+  "ru": "Мина воздушного поиска",
+  "section": "traps",
+  "village": "home"
+ },
+ "12000008": {
+  "en": "Skeleton Trap",
+  "ru": "Скелет в шкафу",
+  "section": "traps",
+  "village": "home"
+ },
+ "12000010": {
+  "en": "Spring Trap",
+  "ru": "Ловушка-пружина",
+  "section": "traps",
+  "village": "builderBase"
+ },
+ "12000011": {
+  "en": "Push Trap",
+  "ru": "Подбрасывающая ловушка",
+  "section": "traps",
+  "village": "builderBase"
+ },
+ "12000013": {
+  "en": "Mine",
+  "ru": "Мина",
+  "section": "traps",
+  "village": "builderBase"
+ },
+ "12000014": {
+  "en": "Mega Mine",
+  "ru": "Мегамина",
+  "section": "traps",
+  "village": "builderBase"
+ },
+ "12000016": {
+  "en": "Tornado Trap",
+  "ru": "Ловушка с торнадо",
+  "section": "traps",
+  "village": "home"
+ },
+ "12000020": {
+  "en": "Giga Bomb",
+  "ru": "Гигабомба",
+  "section": "traps",
+  "village": "home"
+ },
+ "26000000": {
+  "en": "Lightning Spell",
+  "ru": "Грозовое заклинание",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000001": {
+  "en": "Healing Spell",
+  "ru": "Исцеляющее заклинание",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000002": {
+  "en": "Rage Spell",
+  "ru": "Заклинание ярости",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000003": {
+  "en": "Jump Spell",
+  "ru": "Заклинание прыжка",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000005": {
+  "en": "Freeze Spell",
+  "ru": "Замораживающее заклинание",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000006": {
+  "en": "Santa's Surprise",
+  "ru": "Сюрприз от Санты",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000009": {
+  "en": "Poison Spell",
+  "ru": "Ядовитое заклинание",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000010": {
+  "en": "Earthquake Spell",
+  "ru": "Землетрясущее заклинание",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000011": {
+  "en": "Haste Spell",
+  "ru": "Спешное заклинание",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000016": {
+  "en": "Clone Spell",
+  "ru": "Клонирующее заклинание",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000017": {
+  "en": "Skeleton Spell",
+  "ru": "Скелетное заклинание",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000028": {
+  "en": "Bat Spell",
+  "ru": "Заклинание летучих мышей",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000035": {
+  "en": "Invisibility Spell",
+  "ru": "Заклинание невидимости",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000053": {
+  "en": "Recall Spell",
+  "ru": "Отзывающее заклинание",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000070": {
+  "en": "Overgrowth Spell",
+  "ru": "Заклинание разрастания",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000073": {
+  "en": "Bag of Frostmites",
+  "ru": "Мешок снежных блох",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000098": {
+  "en": "Revive Spell",
+  "ru": "Заклинание возрождения",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000109": {
+  "en": "Ice Block Spell",
+  "ru": "Заклинание «Оледенение»",
+  "section": "spells",
+  "village": "home"
+ },
+ "26000120": {
+  "en": "Totem Spell",
+  "ru": "Заклинание тотема",
+  "section": "spells",
+  "village": "home"
+ },
+ "28000000": {
+  "en": "Barbarian King",
+  "ru": "Король варваров",
+  "section": "heroes",
+  "village": "home"
+ },
+ "28000001": {
+  "en": "Archer Queen",
+  "ru": "Королева лучниц",
+  "section": "heroes",
+  "village": "home"
+ },
+ "28000002": {
+  "en": "Grand Warden",
+  "ru": "Хранитель",
+  "section": "heroes",
+  "village": "home"
+ },
+ "28000003": {
+  "en": "Battle Machine",
+  "ru": "Боевая машина",
+  "section": "heroes",
+  "village": "builderBase"
+ },
+ "28000004": {
+  "en": "Royal Champion",
+  "ru": "Королевский чемпион",
+  "section": "heroes",
+  "village": "home"
+ },
+ "28000005": {
+  "en": "Battle Copter",
+  "ru": "Боевой вертолет",
+  "section": "heroes",
+  "village": "builderBase"
+ },
+ "28000006": {
+  "en": "Minion Prince",
+  "ru": "Принц миньонов",
+  "section": "heroes",
+  "village": "home"
+ },
+ "4000000": {
+  "en": "Barbarian",
+  "ru": "Варвар",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000001": {
+  "en": "Archer",
+  "ru": "Лучница",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000002": {
+  "en": "Goblin",
+  "ru": "Гоблин",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000003": {
+  "en": "Giant",
+  "ru": "Гигант",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000004": {
+  "en": "Wall Breaker",
+  "ru": "Стенобой",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000005": {
+  "en": "Balloon",
+  "ru": "Воздушный шар",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000006": {
+  "en": "Wizard",
+  "ru": "Колдун",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000007": {
+  "en": "Healer",
+  "ru": "Целительница",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000008": {
+  "en": "Dragon",
+  "ru": "Дракон",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000009": {
+  "en": "P.E.K.K.A",
+  "ru": "П.Е.К.К.А.",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000010": {
+  "en": "Minion",
+  "ru": "Миньон",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000011": {
+  "en": "Hog Rider",
+  "ru": "Всадник на кабане",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000012": {
+  "en": "Valkyrie",
+  "ru": "Валькирия",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000013": {
+  "en": "Golem",
+  "ru": "Голем",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000015": {
+  "en": "Witch",
+  "ru": "Ведьма",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000017": {
+  "en": "Lava Hound",
+  "ru": "Адская гончая",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000022": {
+  "en": "Bowler",
+  "ru": "Вышибала",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000023": {
+  "en": "Baby Dragon",
+  "ru": "Дракончик",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000024": {
+  "en": "Miner",
+  "ru": "Шахтер",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000026": {
+  "en": "Super Barbarian",
+  "ru": "Суперварвар",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000027": {
+  "en": "Super Archer",
+  "ru": "Суперлучница",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000028": {
+  "en": "Super Wall Breaker",
+  "ru": "Суперстенобой",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000029": {
+  "en": "Super Giant",
+  "ru": "Супергигант",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000030": {
+  "en": "Ice Wizard",
+  "ru": "Ледяной колдун",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000031": {
+  "en": "Raged Barbarian",
+  "ru": "Яростный варвар",
+  "section": "troops",
+  "village": "builderBase"
+ },
+ "4000032": {
+  "en": "Sneaky Archer",
+  "ru": "Коварная лучница",
+  "section": "troops",
+  "village": "builderBase"
+ },
+ "4000033": {
+  "en": "Beta Minion",
+  "ru": "Радиоактивный миньон",
+  "section": "troops",
+  "village": "builderBase"
+ },
+ "4000034": {
+  "en": "Boxer Giant",
+  "ru": "Гигант-боксер",
+  "section": "troops",
+  "village": "builderBase"
+ },
+ "4000035": {
+  "en": "Bomber",
+  "ru": "Подрывник",
+  "section": "troops",
+  "village": "builderBase"
+ },
+ "4000036": {
+  "en": "Power P.E.K.K.A",
+  "ru": "Гипер-П.Е.К.К.А.",
+  "section": "troops",
+  "village": "builderBase"
+ },
+ "4000037": {
+  "en": "Cannon Cart",
+  "ru": "Повозка с пушкой",
+  "section": "troops",
+  "village": "builderBase"
+ },
+ "4000038": {
+  "en": "Drop Ship",
+  "ru": "Скелетоносец",
+  "section": "troops",
+  "village": "builderBase"
+ },
+ "4000041": {
+  "en": "Baby Dragon",
+  "ru": "Дракончик",
+  "section": "troops",
+  "village": "builderBase"
+ },
+ "4000042": {
+  "en": "Night Witch",
+  "ru": "Ночная ведьма",
+  "section": "troops",
+  "village": "builderBase"
+ },
+ "4000045": {
+  "en": "Battle Ram",
+  "ru": "Боевой таран",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000047": {
+  "en": "Royal Ghost",
+  "ru": "Королевский призрак",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000048": {
+  "en": "Pumpkin Barbarian",
+  "ru": "Тыквенный варвар",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000050": {
+  "en": "Giant Skeleton",
+  "ru": "Гигантский скелет",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000051": {
+  "en": "Wall Wrecker",
+  "ru": "Разрушитель стен",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000052": {
+  "en": "Battle Blimp",
+  "ru": "Боевой дирижабль",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000053": {
+  "en": "Yeti",
+  "ru": "Йети",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000055": {
+  "en": "Sneaky Goblin",
+  "ru": "Коварный гоблин",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000056": {
+  "en": "Super Miner",
+  "ru": "Супершахтер",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000057": {
+  "en": "Rocket Balloon",
+  "ru": "Ракетный шар",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000058": {
+  "en": "Ice Golem",
+  "ru": "Ледяной голем",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000059": {
+  "en": "Electro Dragon",
+  "ru": "Электродракон",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000061": {
+  "en": "Skeleton Barrel",
+  "ru": "Бочка со скелетами",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000062": {
+  "en": "Stone Slammer",
+  "ru": "Камнебросатель",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000063": {
+  "en": "Inferno Dragon",
+  "ru": "Пламенный дракон",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000064": {
+  "en": "Super Valkyrie",
+  "ru": "Супервалькирия",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000065": {
+  "en": "Dragon Rider",
+  "ru": "Всадник на драконе",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000066": {
+  "en": "Super Witch",
+  "ru": "Суперведьма",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000067": {
+  "en": "M.E.C.H.A",
+  "ru": "М.Е.Х.А.",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000070": {
+  "en": "Hog Glider",
+  "ru": "Всадник на дельтаплане",
+  "section": "troops",
+  "village": "builderBase"
+ },
+ "4000072": {
+  "en": "Party Wizard",
+  "ru": "Диско-колдун",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000075": {
+  "en": "Siege Barracks",
+  "ru": "Осадные казармы",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000076": {
+  "en": "Ice Hound",
+  "ru": "Ледяная гончая",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000080": {
+  "en": "Super Bowler",
+  "ru": "Супервышибала",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000081": {
+  "en": "Super Dragon",
+  "ru": "Супердракон",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000082": {
+  "en": "Headhunter",
+  "ru": "Охотница за головами",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000083": {
+  "en": "Super Wizard",
+  "ru": "Суперколдун",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000084": {
+  "en": "Super Minion",
+  "ru": "Суперминьон",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000087": {
+  "en": "Log Launcher",
+  "ru": "Бревномет",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000091": {
+  "en": "Flame Flinger",
+  "ru": "Огнеметатель",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000092": {
+  "en": "Battle Drill",
+  "ru": "Боевой бур",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000094": {
+  "en": "Ram Rider",
+  "ru": "Всадница на баране",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000095": {
+  "en": "Electro Titan",
+  "ru": "Электротитанида",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000097": {
+  "en": "Apprentice Warden",
+  "ru": "Ученик хранителя",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000098": {
+  "en": "Super Hog Rider",
+  "ru": "Супервсадник на кабане",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000101": {
+  "en": "Barcher",
+  "ru": "Варвар-лучник",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000102": {
+  "en": "Witch Golem",
+  "ru": "Ведьмоголем",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000103": {
+  "en": "Hog Wizard",
+  "ru": "Всадник-колдун",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000104": {
+  "en": "Lavaloon",
+  "ru": "Лавашар",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000106": {
+  "en": "Electrofire Wizard",
+  "ru": "Огневержец",
+  "section": "troops",
+  "village": "builderBase"
+ },
+ "4000110": {
+  "en": "Root Rider",
+  "ru": "Лесная всадница",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000118": {
+  "en": "C.O.O.K.I.E",
+  "ru": "П.Е.Ч.Е.Н.Ь.К.А.",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000119": {
+  "en": "Firecracker",
+  "ru": "Огненная лучница",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000120": {
+  "en": "Azure Dragon",
+  "ru": "Лазурный дракон",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000121": {
+  "en": "Barbarian Kicker",
+  "ru": "Варвар-нападающий",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000122": {
+  "en": "Giant Thrower",
+  "ru": "Гигант с мячом",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000123": {
+  "en": "Druid",
+  "ru": "Друид",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000125": {
+  "en": "Broom Witch",
+  "ru": "Ведьма на метле",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000130": {
+  "en": "Ice Minion",
+  "ru": "Ледяной миньон",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000132": {
+  "en": "Thrower",
+  "ru": "Метатель",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000135": {
+  "en": "Troop Launcher",
+  "ru": "Войскомет",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000136": {
+  "en": "Debt Collector",
+  "ru": "Коллектор",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000142": {
+  "en": "Snake Barrel",
+  "ru": "Бочка со змеями",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000147": {
+  "en": "Super Yeti",
+  "ru": "Суперйети",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000150": {
+  "en": "Furnace",
+  "ru": "Печь",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000156": {
+  "en": "Giant Giant",
+  "ru": "Гигантский гигант",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000157": {
+  "en": "K.A.N.E",
+  "ru": "К.Е.Й.Н.",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000158": {
+  "en": "The Disarmer",
+  "ru": "Беспредельщица",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000159": {
+  "en": "YEETer",
+  "ru": "Швырятель",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000164": {
+  "en": "YEETer",
+  "ru": "Швырятель",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000165": {
+  "en": "The Disarmer",
+  "ru": "Беспредельщица",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000167": {
+  "en": "Meteor Golem",
+  "ru": "Метеоритный голем",
+  "section": "troops",
+  "village": "home"
+ },
+ "4000177": {
+  "en": "Meteor Golem",
+  "ru": "Метеоритный голем",
+  "section": "troops",
+  "village": "home"
+ },
+ "73000000": {
+  "en": "L.A.S.S.I",
+  "ru": "Л.Э.С.С.И.",
+  "section": "pets",
+  "village": "home"
+ },
+ "73000001": {
+  "en": "Mighty Yak",
+  "ru": "Могучий як",
+  "section": "pets",
+  "village": "home"
+ },
+ "73000002": {
+  "en": "Electro Owl",
+  "ru": "Электросова",
+  "section": "pets",
+  "village": "home"
+ },
+ "73000003": {
+  "en": "Unicorn",
+  "ru": "Единорог",
+  "section": "pets",
+  "village": "home"
+ },
+ "73000004": {
+  "en": "Phoenix",
+  "ru": "Феникс",
+  "section": "pets",
+  "village": "home"
+ },
+ "73000007": {
+  "en": "Poison Lizard",
+  "ru": "Ядовитый ящер",
+  "section": "pets",
+  "village": "home"
+ },
+ "73000008": {
+  "en": "Diggy",
+  "ru": "Копатик",
+  "section": "pets",
+  "village": "home"
+ },
+ "73000009": {
+  "en": "Frosty",
+  "ru": "Снежок",
+  "section": "pets",
+  "village": "home"
+ },
+ "73000010": {
+  "en": "Spirit Fox",
+  "ru": "Призрачная лиса",
+  "section": "pets",
+  "village": "home"
+ },
+ "73000011": {
+  "en": "Angry Jelly",
+  "ru": "Злая медуза",
+  "section": "pets",
+  "village": "home"
+ },
+ "73000016": {
+  "en": "Sneezy",
+  "ru": "Чихуня",
+  "section": "pets",
+  "village": "home"
+ },
+ "90000000": {
+  "en": "Barbarian Puppet",
+  "ru": "Кукла-варвар",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000001": {
+  "en": "Rage Vial",
+  "ru": "Фиал ярости",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000002": {
+  "en": "Archer Puppet",
+  "ru": "Кукла-лучница",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000003": {
+  "en": "Invisibility Vial",
+  "ru": "Фиал невидимости",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000004": {
+  "en": "Eternal Tome",
+  "ru": "Книга вечности",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000005": {
+  "en": "Life Gem",
+  "ru": "Кристалл жизни",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000006": {
+  "en": "Seeking Shield",
+  "ru": "Щит-искатель",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000007": {
+  "en": "Royal Gem",
+  "ru": "Королевский кристалл",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000008": {
+  "en": "Earthquake Boots",
+  "ru": "Землетрясущие ботинки",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000009": {
+  "en": "Hog Rider Puppet",
+  "ru": "Кукла-всадник на кабане",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000010": {
+  "en": "Giant Gauntlet",
+  "ru": "Перчатка гиганта",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000011": {
+  "en": "Vampstache",
+  "ru": "Вампирские усы",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000012": {
+  "en": "Haste Vial",
+  "ru": "Фиал спешки",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000013": {
+  "en": "Rocket Spear",
+  "ru": "Копье-ракета",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000014": {
+  "en": "Spiky Ball",
+  "ru": "Мяч с шипами",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000015": {
+  "en": "Frozen Arrow",
+  "ru": "Ледяная стрела",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000017": {
+  "en": "Giant Arrow",
+  "ru": "Гигантская стрела",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000019": {
+  "en": "Heroic Torch",
+  "ru": "Факел героев",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000020": {
+  "en": "Healer Puppet",
+  "ru": "Кукла-целительница",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000022": {
+  "en": "Fireball",
+  "ru": "Огненный шар",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000024": {
+  "en": "Rage Gem",
+  "ru": "Кристалл ярости",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000032": {
+  "en": "Snake Bracelet",
+  "ru": "Змеиный браслет",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000034": {
+  "en": "Healing Tome",
+  "ru": "Книга исцеления",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000035": {
+  "en": "Dark Crown",
+  "ru": "Темная корона",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000039": {
+  "en": "Magic Mirror",
+  "ru": "Волшебное зеркало",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000040": {
+  "en": "Electro Boots",
+  "ru": "Электросапоги",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000041": {
+  "en": "Lavaloon Puppet",
+  "ru": "Кукла-лавашар",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000042": {
+  "en": "Henchmen Puppet",
+  "ru": "Кукольные приспешники",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000043": {
+  "en": "Dark Orb",
+  "ru": "Сфера тьмы",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000044": {
+  "en": "Metal Pants",
+  "ru": "Железные штаны",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000047": {
+  "en": "Noble Iron",
+  "ru": "Королевская гантель",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000048": {
+  "en": "Action Figure",
+  "ru": "Солдатик",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000049": {
+  "en": "Meteor Staff",
+  "ru": "Метеоритный посох",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000050": {
+  "en": "Frost Flake",
+  "ru": "Снежинка",
+  "section": "equipment",
+  "village": "home"
+ },
+ "90000051": {
+  "en": "Stick Horse",
+  "ru": "Лошадка на палке",
+  "section": "equipment",
+  "village": "home"
+ },
+ "93000000": {
+  "en": "Builder's Apprentice",
+  "ru": "Ученик строителя",
+  "section": "helpers",
+  "village": "home"
+ },
+ "93000001": {
+  "en": "Lab Assistant",
+  "ru": "Лаборант",
+  "section": "helpers",
+  "village": "home"
+ },
+ "93000002": {
+  "en": "Alchemist",
+  "ru": "Алхимик",
+  "section": "helpers",
+  "village": "home"
+ }
+}

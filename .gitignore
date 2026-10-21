@@ -1,0 +1,33 @@
+# Secrets — never commit
+bot_token.txt
+coc_api_key.txt
+*.token
+.env
+
+# Bot runtime data (Telegram chat ids, timers, logs)
+bot_data.json
+bot_data.json.tmp
+bot.log
+bot.log.old
+
+# Personal exports and API dumps
+export.json
+export_*.json
+!planner/examples/export_*.json
+clans/
+warlog*.json
+currentwar.json
+found_wars/
+
+# Generated plans (examples are kept)
+plan_th*.json
+plan_th*.html
+plan_th*.ics
+!planner/examples/plan_th*
+!docs/index.html
+
+# Local tooling
+.claude/
+.vscode/
+__pycache__/
+*.pyc
