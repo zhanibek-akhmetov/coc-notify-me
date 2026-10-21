@@ -7,8 +7,17 @@
 """
 import json, os, sys, time, urllib.request, urllib.parse, urllib.error
 
+
+def _key_from_file():
+    """Ключ из coc_api_key.txt рядом со скриптом (файл не попадает в git)."""
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "coc_api_key.txt")
+    try:
+        return open(p, encoding="utf-8").read().strip() or None
+    except OSError:
+        return None
+
 CLAN_TAG = "#8UYGYPL"
-API_KEY = os.environ.get("COC_API_KEY") or (sys.argv[1] if len(sys.argv) > 1 else None)
+API_KEY = (os.environ.get("COC_API_KEY") or _key_from_file()) or (sys.argv[1] if len(sys.argv) > 1 else None)
 BASE = "https://api.clashofclans.com/v1"
 OUT_DIR = "found_wars"
 
@@ -27,7 +36,7 @@ def q(tag):
 
 
 if not API_KEY:
-    sys.exit("Укажи ключ: python coc_war_hunt.py ТВОЙ_КЛЮЧ  (или переменная COC_API_KEY)")
+    sys.exit("Положи ключ в coc_api_key.txt рядом со скриптом, задай COC_API_KEY или передай: python coc_war_hunt.py КЛЮЧ")
 
 log, code = get(f"/clans/{q(CLAN_TAG)}/warlog")
 if code != 200:

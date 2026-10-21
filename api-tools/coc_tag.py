@@ -4,9 +4,18 @@
 """
 import json, os, sys, urllib.request, urllib.parse, urllib.error
 
-API_KEY = os.environ.get("COC_API_KEY")
+
+def _key_from_file():
+    """Ключ из coc_api_key.txt рядом со скриптом (файл не попадает в git)."""
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "coc_api_key.txt")
+    try:
+        return open(p, encoding="utf-8").read().strip() or None
+    except OSError:
+        return None
+
+API_KEY = (os.environ.get("COC_API_KEY") or _key_from_file())
 if not API_KEY:
-    sys.exit("Задай ключ в переменной COC_API_KEY (ключ: developer.clashofclans.com)")
+    sys.exit("Положи ключ в coc_api_key.txt рядом со скриптом или задай COC_API_KEY (ключ: developer.clashofclans.com)")
 if len(sys.argv) < 2:
     sys.exit('Запуск: python coc_tag.py "#ТЕГ"')
 tag = sys.argv[1] if sys.argv[1].startswith("#") else "#" + sys.argv[1]

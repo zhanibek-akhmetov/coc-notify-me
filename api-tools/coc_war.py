@@ -5,7 +5,16 @@
 """
 import json, os, sys, urllib.request, urllib.parse, urllib.error
 
-API_KEY = os.environ.get("COC_API_KEY")
+
+def _key_from_file():
+    """Ключ из coc_api_key.txt рядом со скриптом (файл не попадает в git)."""
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "coc_api_key.txt")
+    try:
+        return open(p, encoding="utf-8").read().strip() or None
+    except OSError:
+        return None
+
+API_KEY = (os.environ.get("COC_API_KEY") or _key_from_file())
 BASE = "https://api.clashofclans.com/v1"
 
 def get(path):
@@ -68,7 +77,7 @@ def check_clan(clan_tag):
                     save(folder, f"cwl_round{i}.json", w)
 
 if not API_KEY:
-    sys.exit("Задай ключ в переменной COC_API_KEY")
+    sys.exit("Положи ключ в coc_api_key.txt рядом со скриптом или задай COC_API_KEY")
 if len(sys.argv) < 2:
     sys.exit("Укажи теги: python coc_war.py #ТЕГ1 #ТЕГ2 ...")
 

@@ -89,8 +89,9 @@ Supported Town Halls: 5, 6, 7 (adding more = adding their tables to `coc_plan.py
 
 Need a free key from [developer.clashofclans.com](https://developer.clashofclans.com) (keys are bound to your IP).
 
+Put the key into `api-tools/coc_api_key.txt` (git-ignored), or set the `COC_API_KEY` environment variable.
+
 ```bash
-set COC_API_KEY=your_key            # PowerShell: $env:COC_API_KEY="your_key"
 python api-tools/coc_war.py "#CLANTAG"            # current war, war log, CWL → clans/<tag>/
 python api-tools/coc_warlog_year.py 2015 "#CLANTAG"  # full war log filtered by year
 python api-tools/coc_tag.py "#TAG"                # is it a player or a clan?
