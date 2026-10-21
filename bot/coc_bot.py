@@ -237,7 +237,7 @@ def dur(sec, lang="ru"):
 
 def tcol(sec, lang, width=6):
     """Время моноширинным шрифтом, выровненное вправо — получается ровная колонка."""
-    return f"<code>{dur(sec, lang):>{width}}</code>"
+    return f"<code>{esc(f'{dur(sec, lang):>{width}}')}</code>"  # esc: «<1м» иначе ломает HTML
 
 
 def short(i, lang):
@@ -368,7 +368,10 @@ class TG:
                   parse_mode="HTML", reply_markup=markup)
 
     def answer(self, callback_id, text=""):
-        self.call("answerCallbackQuery", callback_query_id=callback_id, text=text)
+        try:
+            self.call("answerCallbackQuery", callback_query_id=callback_id, text=text)
+        except urllib.error.HTTPError as e:  # нажата кнопка под старым сообщением — не страшно
+            log("Ответ на кнопку не принят:", e.read().decode(errors="replace")[:200])
 
     def download(self, file_id):
         path = self.call("getFile", file_id=file_id)["file_path"]
@@ -595,7 +598,7 @@ def handle_export(tg, db, chat, chat_id, raw):
     done = [i for i in items if i["sent"]]
     out = [f"📥 <b>{esc(tag)}</b> · " + T[lang]["export_ok"].format(t=when(ts))]
     if now - ts > 6 * 3600:
-        out.append(T[lang]["old_export"].format(d=dur(now - ts, lang)))
+        out.append(T[lang]["old_export"].format(d=esc(dur(now - ts, lang))))
     out += villages_block(chat["accounts"][tag], now, lang)
     if done:
         out.append("\n" + T[lang]["already"].format(n=len(done)))
@@ -747,7 +750,8 @@ def main():
                     elif "callback_query" in u:
                         on_callback(tg, db, u["callback_query"])
                 except Exception as e:
-                    log("Ошибка обработки:", repr(e))
+                    detail = e.read().decode(errors="replace")[:300] if isinstance(e, urllib.error.HTTPError) else ""
+                    log("Ошибка обработки:", repr(e), detail)
                 save(db)
         except KeyboardInterrupt:
             log("Остановлен.")
