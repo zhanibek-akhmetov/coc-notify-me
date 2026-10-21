@@ -18,7 +18,7 @@ Pure Python 3.9+, zero dependencies (standard library only). No pip install.
 | 📊 [`planner/`](planner/) | Reads the same export and simulates 5 builders + the laboratory to find the fastest order to max the current Town Hall and upgrade to the next one. Outputs an interactive HTML Gantt chart and an `.ics` calendar. |
 | 🔎 [`api-tools/`](api-tools/) | Small scripts for the official Clash of Clans API: clan war log, current war, CWL, player/clan lookup by tag. |
 
-**Live demo of the planner:** open [`docs/index.html`](docs/index.html), or the GitHub Pages link once Pages is enabled (Settings → Pages → `main` / `docs`).
+**▶ Live demo of the planner: [zhanibek-akhmetov.github.io/coc-notify-me](https://zhanibek-akhmetov.github.io/coc-notify-me/)** — an interactive Gantt chart for a Town Hall 7 village (tap bars to mark upgrades as started).
 
 ---
 
